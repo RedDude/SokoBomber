@@ -131,6 +131,10 @@ public class PlayerMovement : MonoBehaviour {
 				MoveMovableBy(movementTargetPos - this.transform.position);
 
 				this.transform.Translate(movementTargetPos - this.transform.position);
+
+				var obj = GameObject.FindGameObjectWithTag("Overlord");
+
+				obj.SendMessage("NextTurn");
 			}
 		}
 	}
@@ -177,6 +181,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.TextArea (new Rect (0, 0, 100, 100), this.transform.position.ToString ());
+		GUI.TextArea (new Rect (0, 0, 120, 20), this.transform.position.ToString ());
 	}
 }
