@@ -2,16 +2,22 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
+	public float MoveSpeedModifier = 2f;
 
 	// Use this for initialization
 	void Start () {
 		moving = false;
+		movingCollision = false;
 		movementTargetPos = new Vector3 (0, 0, 0);
+		movableObject = null;
 	}
 	
 	// Update is called once per frame
 	private bool moving;
 	private Vector3 movementTargetPos;
+	private Vector3 movableTargetPos;
+	private bool movingCollision;
+	private GameObject movableObject;
 	void Update () {
 		Vector3 InWorldPos = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z)).GetPoint(10);
 
@@ -26,11 +32,13 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					//move left
 					movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
+					movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
 				}
 				else if (mouseDir.x >= 0)
 				{
 					//move right
 					movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+					movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
 				}
 			}
 			else if (Mathf.Abs(mouseDir.x) <= Mathf.Abs(mouseDir.y))
@@ -40,15 +48,18 @@ public class PlayerMovement : MonoBehaviour {
 				{
 					//move up
 					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
+					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
 				}
 				else if (mouseDir.y >= 0)
 				{
 					//move down
 					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
+					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
 				}
 			}
 
 			moving = true;
+			movingCollision = true;
 		}
 
 		if (!moving)
@@ -56,23 +67,45 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKey(KeyCode.S))
 			{
 				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
 				moving = true;
+				movingCollision = true;
 			}
 			else if (Input.GetKey(KeyCode.W))
 			{
 				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
 				moving = true;
+				movingCollision = true;
 			}
 			else if (Input.GetKey(KeyCode.A))
 			{
 				movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
 				moving = true;
+				movingCollision = true;
 			}
 			else if (Input.GetKey(KeyCode.D))
 			{
 				movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
 				moving = true;
+				movingCollision = true;
 			}
+		}
+
+		if (movingCollision)
+		{ //do a collision check!
+			moving = IsCollisionFree(movementTargetPos);
+			if (moving)
+			{
+				FindMovable(movementTargetPos);
+				if (movableObject != null)
+				{
+					moving = IsCollisionFree(movableTargetPos);
+				}
+			}
+			movingCollision = false;
 		}
 
 		if (moving)
@@ -82,34 +115,68 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				directVector.Normalize();
 
-				this.transform.Translate(Time.deltaTime * directVector);
-				Camera.main.transform.Translate(Time.deltaTime * directVector);
+				var mainDelta = MoveSpeedModifier * Time.deltaTime;
 
-				MoveParalaxBy(Time.deltaTime * directVector);
+				this.transform.Translate(mainDelta * directVector);
+				Camera.main.transform.Translate(mainDelta * directVector);
+
+				MoveMovableBy(mainDelta * directVector);
 			}
 			else
 			{
 				moving = false;
-				this.transform.Translate(movementTargetPos - this.transform.position);
+
 				Camera.main.transform.Translate(movementTargetPos - this.transform.position);
 
-				MoveParalaxBy(movementTargetPos - this.transform.position);
+				MoveMovableBy(movementTargetPos - this.transform.position);
+
+				this.transform.Translate(movementTargetPos - this.transform.position);
 			}
 		}
 	}
 
-	void MoveParalaxBy(Vector3 ammt)
+	bool IsCollisionFree(Vector3 pos)
 	{
-		var obj1 = GameObject.FindGameObjectWithTag ("ParalaxBG");
+		var collidables = GameObject.FindGameObjectsWithTag ("Collidable");
 
-		obj1.transform.Translate (ammt * 0.975f);
+		for (int i = 0; i < collidables.Length; i++)
+		{
+			var dist = (collidables[i].transform.position - pos).magnitude;
+			if (dist < 0.1f)
+			{
+				return false;
+			}
+		}
 
-		var obj2 = GameObject.FindGameObjectWithTag ("Paralax1");
+		return true;
+	}
 
-		obj2.transform.Translate (ammt * 0.95f);
+	void FindMovable(Vector3 pos)
+	{
+		movableObject = null;
 
-		var obj3 = GameObject.FindGameObjectWithTag ("Paralax2");
+		var movables = GameObject.FindGameObjectsWithTag ("Movable");
 
-		obj3.transform.Translate (ammt * 0.9f);
+		for (int i = 0; i < movables.Length; i++)
+		{
+			var dist = (movables[i].transform.position - pos).magnitude;
+			if (dist < 0.1f)
+			{
+				movableObject = movables[i];
+			}
+		}
+	}
+
+	void MoveMovableBy(Vector3 ammt)
+	{
+		if (movableObject != null)
+		{
+			movableObject.transform.Translate(ammt);
+		}
+	}
+
+	void OnGUI()
+	{
+		GUI.TextArea (new Rect (0, 0, 100, 100), this.transform.position.ToString ());
 	}
 }
