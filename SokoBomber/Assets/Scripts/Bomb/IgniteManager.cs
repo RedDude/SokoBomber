@@ -7,6 +7,7 @@ public class IgniteManager : MonoBehaviour {
 	public GameObject ExplosionObject = null;
 
 	public AudioClip explodeClip = null;
+	public AudioClip blipClip = null;
 
 	// Use this for initialization
 	void Start () {
@@ -45,209 +46,174 @@ public class IgniteManager : MonoBehaviour {
 						}
 				}
 
-		if (IsIgnited)
-		{
-			Debug.Log ("IgniteManager: TurnTick - Turns to explosion:" + (Ticks - 1).ToString());
-			Ticks -= 1;
-			if (Ticks == 0)
-			{
-				//Explode!
-				Debug.Log ("IgniteManager: TurnTick - Explode");
-
-				//FSM for each direction:
-				//UP! - increased Y
-				Vector3 startPoint = this.transform.position;
-				bool up_done = false;
-				while (!up_done)
-				{
-					Vector3 newPoint = startPoint + new Vector3(0,1,0);
-
-					var o_player = FindTaggedObjectAtPoint("Player", newPoint);
-					var o_coll = FindTaggedObjectAtPoint("Collidable", newPoint);
-					var o_destr = FindTaggedObjectAtPoint("Destructible", newPoint);
-					var o_movable = FindTaggedObjectAtPoint("Movable", newPoint);
-
-					if (o_player != null)
-					{
-						//player dies!
-						o_player.SendMessage("Die");
-					}
-					else if (o_coll != null)
-					{
-						//collidable means we stop!
-						up_done = true;
-					}
-					else if (o_destr != null)
-					{
-						//destructibles must die
-						Destroy (o_destr);
-						up_done = true;
-					}
-					else if (o_movable)
-					{
-						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
-						cmpt.IsIgnited = true;
-						if (cmpt.Ticks != 0)
-						{
-							cmpt.Ticks = 1;
-							o_movable.SendMessage("TurnTick");
+		if (IsIgnited) {
+						Debug.Log ("IgniteManager: TurnTick - Turns to explosion:" + (Ticks - 1).ToString ());
+						Ticks -= 1;
+						if (Ticks > 0) {
+							AudioSource.PlayClipAtPoint (blipClip, this.transform.position, 0.5f);
 						}
+						else if (Ticks == 0) {
+								//Explode!
+								Debug.Log ("IgniteManager: TurnTick - Explode");
 
-						up_done = true;
-					}
+								//FSM for each direction:
+								//UP! - increased Y
+								Vector3 startPoint = this.transform.position;
+								bool up_done = false;
+								while (!up_done) {
+										Vector3 newPoint = startPoint + new Vector3 (0, 1, 0);
 
-					Instantiate(ExplosionObject, newPoint, Quaternion.identity);
+										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
+										var o_coll = FindTaggedObjectAtPoint ("Collidable", newPoint);
+										var o_destr = FindTaggedObjectAtPoint ("Destructible", newPoint);
+										var o_movable = FindTaggedObjectAtPoint ("Movable", newPoint);
 
-					startPoint = newPoint;
-				}
+										if (o_player != null) {
+												//player dies!
+												o_player.SendMessage ("Die");
+										} else if (o_coll != null) {
+												//collidable means we stop!
+												up_done = true;
+										} else if (o_destr != null) {
+												//destructibles must die
+												Destroy (o_destr);
+												up_done = true;
+										} else if (o_movable) {
+												//Blow up the thing is it is a bomb
+												var cmpt = o_movable.GetComponent<IgniteManager> () as IgniteManager;
+												cmpt.IsIgnited = true;
+												if (cmpt.Ticks != 0) {
+														cmpt.Ticks = 1;
+														o_movable.SendMessage ("TurnTick");
+												}
 
-				startPoint = this.transform.position;
-				bool down_done = false;
-				while (!down_done)
-				{
-					Vector3 newPoint = startPoint + new Vector3(0,-1,0);
+												up_done = true;
+										}
+
+										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
+
+										startPoint = newPoint;
+								}
+
+								startPoint = this.transform.position;
+								bool down_done = false;
+								while (!down_done) {
+										Vector3 newPoint = startPoint + new Vector3 (0, -1, 0);
 					
-					var o_player = FindTaggedObjectAtPoint("Player", newPoint);
-					var o_coll = FindTaggedObjectAtPoint("Collidable", newPoint);
-					var o_destr = FindTaggedObjectAtPoint("Destructible", newPoint);
-					var o_movable = FindTaggedObjectAtPoint("Movable", newPoint);
+										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
+										var o_coll = FindTaggedObjectAtPoint ("Collidable", newPoint);
+										var o_destr = FindTaggedObjectAtPoint ("Destructible", newPoint);
+										var o_movable = FindTaggedObjectAtPoint ("Movable", newPoint);
 					
-					if (o_player != null)
-					{
-						//player dies!
-						o_player.SendMessage("Die");
-					}
-					else if (o_coll != null)
-					{
-						//collidable means we stop!
-						down_done = true;
-					}
-					else if (o_destr != null)
-					{
-						//destructibles must die
-						Destroy (o_destr);
-						down_done = true;
-					}
-					else if (o_movable)
-					{
-						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
-						cmpt.IsIgnited = true;
-						if (cmpt.Ticks != 0)
-						{
-							cmpt.Ticks = 1;
-							o_movable.SendMessage("TurnTick");
-						}
+										if (o_player != null) {
+												//player dies!
+												o_player.SendMessage ("Die");
+										} else if (o_coll != null) {
+												//collidable means we stop!
+												down_done = true;
+										} else if (o_destr != null) {
+												//destructibles must die
+												Destroy (o_destr);
+												down_done = true;
+										} else if (o_movable) {
+												//Blow up the thing is it is a bomb
+												var cmpt = o_movable.GetComponent<IgniteManager> () as IgniteManager;
+												cmpt.IsIgnited = true;
+												if (cmpt.Ticks != 0) {
+														cmpt.Ticks = 1;
+														o_movable.SendMessage ("TurnTick");
+												}
 						
-						down_done = true;
-					}
+												down_done = true;
+										}
 
-					Instantiate(ExplosionObject, newPoint, Quaternion.identity);
+										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 					
-					startPoint = newPoint;
-				}
+										startPoint = newPoint;
+								}
 
-				startPoint = this.transform.position;
-				bool left_done = false;
-				while (!left_done)
-				{
-					Vector3 newPoint = startPoint + new Vector3(-1,0,0);
+								startPoint = this.transform.position;
+								bool left_done = false;
+								while (!left_done) {
+										Vector3 newPoint = startPoint + new Vector3 (-1, 0, 0);
 					
-					var o_player = FindTaggedObjectAtPoint("Player", newPoint);
-					var o_coll = FindTaggedObjectAtPoint("Collidable", newPoint);
-					var o_destr = FindTaggedObjectAtPoint("Destructible", newPoint);
-					var o_movable = FindTaggedObjectAtPoint("Movable", newPoint);
+										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
+										var o_coll = FindTaggedObjectAtPoint ("Collidable", newPoint);
+										var o_destr = FindTaggedObjectAtPoint ("Destructible", newPoint);
+										var o_movable = FindTaggedObjectAtPoint ("Movable", newPoint);
 					
-					if (o_player != null)
-					{
-						//player dies!
-						o_player.SendMessage("Die");
-					}
-					else if (o_coll != null)
-					{
-						//collidable means we stop!
-						left_done = true;
-					}
-					else if (o_destr != null)
-					{
-						//destructibles must die
-						Destroy (o_destr);
-						left_done = true;
-					}
-					else if (o_movable)
-					{
-						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
-						cmpt.IsIgnited = true;
-						if (cmpt.Ticks != 0)
-						{
-							cmpt.Ticks = 1;
-							o_movable.SendMessage("TurnTick");
-						}
+										if (o_player != null) {
+												//player dies!
+												o_player.SendMessage ("Die");
+										} else if (o_coll != null) {
+												//collidable means we stop!
+												left_done = true;
+										} else if (o_destr != null) {
+												//destructibles must die
+												Destroy (o_destr);
+												left_done = true;
+										} else if (o_movable) {
+												//Blow up the thing is it is a bomb
+												var cmpt = o_movable.GetComponent<IgniteManager> () as IgniteManager;
+												cmpt.IsIgnited = true;
+												if (cmpt.Ticks != 0) {
+														cmpt.Ticks = 1;
+														o_movable.SendMessage ("TurnTick");
+												}
 						
-						left_done = true;
-					}
+												left_done = true;
+										}
 					
-					startPoint = newPoint;
+										startPoint = newPoint;
 
-					Instantiate(ExplosionObject, newPoint, Quaternion.identity);
-				}
+										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
+								}
 
-				startPoint = this.transform.position;
-				bool right_down = false;
-				while (!right_down)
-				{
-					Vector3 newPoint = startPoint + new Vector3(1,0,0);
+								startPoint = this.transform.position;
+								bool right_down = false;
+								while (!right_down) {
+										Vector3 newPoint = startPoint + new Vector3 (1, 0, 0);
 					
-					var o_player = FindTaggedObjectAtPoint("Player", newPoint);
-					var o_coll = FindTaggedObjectAtPoint("Collidable", newPoint);
-					var o_destr = FindTaggedObjectAtPoint("Destructible", newPoint);
-					var o_movable = FindTaggedObjectAtPoint("Movable", newPoint);
+										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
+										var o_coll = FindTaggedObjectAtPoint ("Collidable", newPoint);
+										var o_destr = FindTaggedObjectAtPoint ("Destructible", newPoint);
+										var o_movable = FindTaggedObjectAtPoint ("Movable", newPoint);
 					
-					if (o_player != null)
-					{
-						//player dies!
-						o_player.SendMessage("Die");
-					}
-					else if (o_coll != null)
-					{
-						//collidable means we stop!
-						right_down = true;
-					}
-					else if (o_destr != null)
-					{
-						//destructibles must die
-						Destroy (o_destr);
-						right_down = true;
-					}
-					else if (o_movable)
-					{
-						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
-						cmpt.IsIgnited = true;
-						if (cmpt.Ticks != 0)
-						{
-							cmpt.Ticks = 1;
-							o_movable.SendMessage("TurnTick");
-						}
+										if (o_player != null) {
+												//player dies!
+												o_player.SendMessage ("Die");
+										} else if (o_coll != null) {
+												//collidable means we stop!
+												right_down = true;
+										} else if (o_destr != null) {
+												//destructibles must die
+												Destroy (o_destr);
+												right_down = true;
+										} else if (o_movable) {
+												//Blow up the thing is it is a bomb
+												var cmpt = o_movable.GetComponent<IgniteManager> () as IgniteManager;
+												cmpt.IsIgnited = true;
+												if (cmpt.Ticks != 0) {
+														cmpt.Ticks = 1;
+														o_movable.SendMessage ("TurnTick");
+												}
 						
-						right_down = true;
-					}
+												right_down = true;
+										}
 
-					Instantiate(ExplosionObject, newPoint, Quaternion.identity);
+										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 					
-					startPoint = newPoint;
+										startPoint = newPoint;
+								}
+
+
+								Instantiate (ExplosionObject, this.transform.position, Quaternion.identity);
+
+								AudioSource.PlayClipAtPoint (explodeClip, this.transform.position, 0.5f);
+
+								Destroy (gameObject);
+						}
 				}
-
-
-				Instantiate(ExplosionObject, this.transform.position, Quaternion.identity);
-
-				AudioSource.PlayClipAtPoint(explodeClip, this.transform.position,0.5f);
-
-				Destroy(gameObject);
-			}
-		}
 	}
 
 	private GameObject FindTaggedObjectAtPoint(string tag, Vector3 point)
