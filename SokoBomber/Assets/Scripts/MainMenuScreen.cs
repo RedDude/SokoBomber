@@ -27,7 +27,7 @@ public class MainMenuScreen : MonoBehaviour {
 			Application.LoadLevel("SandboxScene");
 		}
 
-		if (GUI.Button (new Rect (10, 120, 100, 100), "Lv1")) {
+		if (GUI.Button (new Rect (10, 120, 100, 100), "Lvl 1")) {
 			Application.LoadLevel("Level1Scene");
 		}
 	}
