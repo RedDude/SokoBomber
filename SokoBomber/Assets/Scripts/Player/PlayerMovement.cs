@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 	public float MoveSpeedModifier = 2f;
+	public AudioClip pushClip = null;
 
 	// Use this for initialization
 	void Start () {
@@ -103,6 +104,10 @@ public class PlayerMovement : MonoBehaviour {
 				if (movableObject != null)
 				{
 					moving = IsCollisionFree(movableTargetPos);
+					if (moving)
+					{
+						AudioSource.PlayClipAtPoint(pushClip, this.transform.position,0.5f);
+					}
 				}
 			}
 			movingCollision = false;

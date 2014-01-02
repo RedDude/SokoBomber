@@ -6,6 +6,8 @@ public class IgniteManager : MonoBehaviour {
 	public int Ticks = 2;
 	public GameObject ExplosionObject = null;
 
+	public AudioClip explodeClip = null;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -240,6 +242,8 @@ public class IgniteManager : MonoBehaviour {
 
 
 				Instantiate(ExplosionObject, this.transform.position, Quaternion.identity);
+
+				AudioSource.PlayClipAtPoint(explodeClip, this.transform.position,0.5f);
 
 				Destroy(gameObject);
 			}
