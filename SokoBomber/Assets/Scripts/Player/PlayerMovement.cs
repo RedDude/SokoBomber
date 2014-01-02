@@ -157,6 +157,17 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 
+		collidables = GameObject.FindGameObjectsWithTag ("Destructible");
+		
+		for (int i = 0; i < collidables.Length; i++)
+		{
+			var dist = (collidables[i].transform.position - pos).magnitude;
+			if (dist < 0.1f)
+			{
+				return false;
+			}
+		}
+
 		return true;
 	}
 

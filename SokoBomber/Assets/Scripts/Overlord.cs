@@ -15,14 +15,14 @@ public class Overlord : MonoBehaviour {
 
 	public void NextTurn()
 	{
-		Debug.Log ("Overlord: NextTurn");
+		//Debug.Log ("Overlord: NextTurn");
 		TurnsTotal += 1;
 
 		var movables = GameObject.FindGameObjectsWithTag ("Movable");
 
 		for (int i = 0; i < movables.Length; i++)
 		{
-			Debug.Log ("Overlord: TurnTick for " + movables[i].ToString());
+			//Debug.Log ("Overlord: TurnTick for " + movables[i].ToString());
 			movables[i].SendMessage("TurnTick", null, SendMessageOptions.DontRequireReceiver);
 		}
 	}

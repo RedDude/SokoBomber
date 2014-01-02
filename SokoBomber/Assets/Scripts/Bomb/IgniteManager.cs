@@ -21,7 +21,6 @@ public class IgniteManager : MonoBehaviour {
 
 	public void Ignite(int ticks)
 	{
-		Debug.Log ("IgniteManager: Ignite");
 		if (!IsIgnited)
 		{
 			IsIgnited = true;
@@ -31,15 +30,23 @@ public class IgniteManager : MonoBehaviour {
 
 	public void TurnTick()
 	{
-		Debug.Log ("IgniteManager: TurnTick");
 		if (!IsIgnited) {
-						var igniters = GameObject.FindGameObjectsWithTag ("Ignite");
+				var igniters = GameObject.FindGameObjectsWithTag ("Ignite");
 
-						for (int i = 0; i < igniters.Length; i++) {
+					for (int i = 0; i < igniters.Length; i++) {
 								if ((this.transform.position - igniters [i].transform.position).magnitude < 0.2f) {
 										if (igniters [i].GetComponent (typeof(IgniterTimer)) != null) {
-												var timer_ammt = (igniters [i].GetComponent (typeof(IgniterTimer)) as IgniterTimer).Ticks;
-												Ignite (timer_ammt);
+												var timer_ammt = (igniters [i].GetComponent<IgniterTimer>() as IgniterTimer).Ticks;
+												if (timer_ammt != 0)
+												{
+													Ignite (timer_ammt);
+												}
+												else
+												{
+													Ignite (1);
+													this.gameObject.SendMessage("TurnTick");
+												}
+												
 												return;
 										}
 								}
@@ -60,8 +67,9 @@ public class IgniteManager : MonoBehaviour {
 								//UP! - increased Y
 								Vector3 startPoint = this.transform.position;
 								bool up_done = false;
-								while (!up_done) {
-										Vector3 newPoint = startPoint + new Vector3 (0, 1, 0);
+								int m_d = 10;
+								while (!up_done && m_d > 0) {
+									Vector3 newPoint = startPoint + new Vector3 (0, 1, 0);
 
 										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
 										var o_coll = FindTaggedObjectAtPoint ("Collidable", newPoint);
@@ -93,11 +101,14 @@ public class IgniteManager : MonoBehaviour {
 										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 
 										startPoint = newPoint;
+
+										m_d -= 1;
 								}
 
 								startPoint = this.transform.position;
 								bool down_done = false;
-								while (!down_done) {
+								m_d = 10;
+								while (!down_done && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (0, -1, 0);
 					
 										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
@@ -130,11 +141,14 @@ public class IgniteManager : MonoBehaviour {
 										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 					
 										startPoint = newPoint;
+
+										m_d -= 1;
 								}
 
 								startPoint = this.transform.position;
 								bool left_done = false;
-								while (!left_done) {
+								m_d = 10;
+								while (!left_done && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (-1, 0, 0);
 					
 										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
@@ -167,11 +181,14 @@ public class IgniteManager : MonoBehaviour {
 										startPoint = newPoint;
 
 										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
+
+										m_d -= 1;
 								}
 
 								startPoint = this.transform.position;
 								bool right_down = false;
-								while (!right_down) {
+								m_d = 10;
+								while (!right_down && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (1, 0, 0);
 					
 										var o_player = FindTaggedObjectAtPoint ("Player", newPoint);
@@ -204,6 +221,8 @@ public class IgniteManager : MonoBehaviour {
 										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 					
 										startPoint = newPoint;
+
+										m_d -= 1;
 								}
 
 
