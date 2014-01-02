@@ -183,4 +183,9 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GUI.TextArea (new Rect (0, 0, 120, 20), this.transform.position.ToString ());
 	}
+
+	public void Die()
+	{
+		Destroy (this.gameObject);
+	}
 }

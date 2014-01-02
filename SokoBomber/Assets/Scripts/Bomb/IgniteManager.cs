@@ -84,12 +84,12 @@ public class IgniteManager : MonoBehaviour {
 					else if (o_movable)
 					{
 						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponentInChildren<IgniteManager>() as IgniteManager;
+						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
 						cmpt.IsIgnited = true;
 						if (cmpt.Ticks != 0)
 						{
-							cmpt.Ticks = 0;
-							cmpt.TurnTick();
+							cmpt.Ticks = 1;
+							o_movable.SendMessage("TurnTick");
 						}
 
 						up_done = true;
@@ -130,12 +130,12 @@ public class IgniteManager : MonoBehaviour {
 					else if (o_movable)
 					{
 						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponentInChildren<IgniteManager>() as IgniteManager;
+						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
 						cmpt.IsIgnited = true;
 						if (cmpt.Ticks != 0)
 						{
-							cmpt.Ticks = 0;
-							cmpt.TurnTick();
+							cmpt.Ticks = 1;
+							o_movable.SendMessage("TurnTick");
 						}
 						
 						down_done = true;
@@ -176,12 +176,12 @@ public class IgniteManager : MonoBehaviour {
 					else if (o_movable)
 					{
 						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponentInChildren<IgniteManager>() as IgniteManager;
+						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
 						cmpt.IsIgnited = true;
 						if (cmpt.Ticks != 0)
 						{
-							cmpt.Ticks = 0;
-							cmpt.TurnTick();
+							cmpt.Ticks = 1;
+							o_movable.SendMessage("TurnTick");
 						}
 						
 						left_done = true;
@@ -222,12 +222,12 @@ public class IgniteManager : MonoBehaviour {
 					else if (o_movable)
 					{
 						//Blow up the thing is it is a bomb
-						var cmpt = o_movable.GetComponentInChildren<IgniteManager>() as IgniteManager;
+						var cmpt = o_movable.GetComponent<IgniteManager>() as IgniteManager;
 						cmpt.IsIgnited = true;
 						if (cmpt.Ticks != 0)
 						{
-							cmpt.Ticks = 0;
-							cmpt.TurnTick();
+							cmpt.Ticks = 1;
+							o_movable.SendMessage("TurnTick");
 						}
 						
 						right_down = true;
