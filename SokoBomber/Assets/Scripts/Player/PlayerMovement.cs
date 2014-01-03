@@ -22,6 +22,49 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		Vector3 InWorldPos = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z)).GetPoint(10);
 
+//		if (Input.touchCount > 0 && !moving)
+//		{
+//			var touch = Input.GetTouch(0);
+//			InWorldPos = Camera.main.ScreenPointToRay(touch.position).GetPoint(10);
+//
+//			Vector3 mouseDir = InWorldPos - this.transform.position;
+//			//get the direction
+//			if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
+//			{
+//				//larger X movement
+//				if (mouseDir.x < 0)
+//				{
+//					//move left
+//					movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
+//					movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
+//				}
+//				else if (mouseDir.x >= 0)
+//				{
+//					//move right
+//					movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+//					movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
+//				}
+//			}
+//			else if (Mathf.Abs(mouseDir.x) <= Mathf.Abs(mouseDir.y))
+//			{
+//				//Larger z movement
+//				if (mouseDir.y < 0)
+//				{
+//					//move up
+//					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
+//					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
+//				}
+//				else if (mouseDir.y >= 0)
+//				{
+//					//move down
+//					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
+//					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
+//				}
+//			}
+//			
+//			moving = true;
+//			movingCollision = true;
+//		}
 		if (Input.GetMouseButton(0) && !moving) //On click/tap
 		{
 			Vector3 mouseDir = InWorldPos - this.transform.position;
@@ -63,37 +106,37 @@ public class PlayerMovement : MonoBehaviour {
 			movingCollision = true;
 		}
 
-		if (!moving)
-		{
-			if (Input.GetKey(KeyCode.S))
-			{
-				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
-				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
-				moving = true;
-				movingCollision = true;
-			}
-			else if (Input.GetKey(KeyCode.W))
-			{
-				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
-				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
-				moving = true;
-				movingCollision = true;
-			}
-			else if (Input.GetKey(KeyCode.A))
-			{
-				movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
-				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
-				moving = true;
-				movingCollision = true;
-			}
-			else if (Input.GetKey(KeyCode.D))
-			{
-				movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
-				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
-				moving = true;
-				movingCollision = true;
-			}
-		}
+//		if (!moving)
+//		{
+//			if (Input.GetKey(KeyCode.S))
+//			{
+//				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
+//				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
+//				moving = true;
+//				movingCollision = true;
+//			}
+//			else if (Input.GetKey(KeyCode.W))
+//			{
+//				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
+//				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
+//				moving = true;
+//				movingCollision = true;
+//			}
+//			else if (Input.GetKey(KeyCode.A))
+//			{
+//				movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
+//				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
+//				moving = true;
+//				movingCollision = true;
+//			}
+//			else if (Input.GetKey(KeyCode.D))
+//			{
+//				movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+//				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
+//				moving = true;
+//				movingCollision = true;
+//			}
+//		}
 
 		if (movingCollision)
 		{ //do a collision check!

@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\IgniterTimer.cs" />
      <Compile Include="Assets\Scripts\MainMenuScreen.cs" />
      <Compile Include="Assets\Scripts\Overlord.cs" />
+     <Compile Include="Assets\Scripts\PCG\PCGLevelScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
   </ItemGroup>

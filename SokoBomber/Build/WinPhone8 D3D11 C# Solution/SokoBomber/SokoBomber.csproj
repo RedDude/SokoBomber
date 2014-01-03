@@ -158,6 +158,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>UnityEngine.dll</HintPath>
     </Reference>
