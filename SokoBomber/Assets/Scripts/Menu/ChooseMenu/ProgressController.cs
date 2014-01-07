@@ -39,7 +39,7 @@ public class ProgressController : MonoBehaviour {
 
     public void CompleteLevel(int num)
     {
-        if (num == CompletionProgress + 1 && num < 3) //max - 1
+        if (num == CompletionProgress + 1 && num < 6) //max - 1
         {
             CompletionProgress += 1;
         }

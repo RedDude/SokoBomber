@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour {
 				FindMovable(movementTargetPos);
 				if (movableObject != null)
 				{
-					moving = IsCollisionFree(movableTargetPos);
+					moving = IsCollisionFreeAlt(movableTargetPos);
 					if (moving)
 					{
 						AudioSource.PlayClipAtPoint(pushClip, this.transform.position,0.5f);
@@ -187,32 +187,70 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	bool IsCollisionFree(Vector3 pos)
-	{
-		var collidables = GameObject.FindGameObjectsWithTag ("Collidable");
+    bool IsCollisionFree(Vector3 pos)
+    {
+        var collidables = GameObject.FindGameObjectsWithTag("Collidable");
 
-		for (int i = 0; i < collidables.Length; i++)
-		{
-			var dist = (collidables[i].transform.position - pos).magnitude;
-			if (dist < 0.1f)
-			{
-				return false;
-			}
-		}
+        for (int i = 0; i < collidables.Length; i++)
+        {
+            var dist = (collidables[i].transform.position - pos).magnitude;
+            if (dist < 0.1f)
+            {
+                return false;
+            }
+        }
 
-		collidables = GameObject.FindGameObjectsWithTag ("Destructible");
-		
-		for (int i = 0; i < collidables.Length; i++)
-		{
-			var dist = (collidables[i].transform.position - pos).magnitude;
-			if (dist < 0.1f)
-			{
-				return false;
-			}
-		}
+        collidables = GameObject.FindGameObjectsWithTag("Destructible");
 
-		return true;
-	}
+        for (int i = 0; i < collidables.Length; i++)
+        {
+            var dist = (collidables[i].transform.position - pos).magnitude;
+            if (dist < 0.1f)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool IsCollisionFreeAlt(Vector3 pos)
+    {
+        var collidables = GameObject.FindGameObjectsWithTag("Collidable");
+
+        for (int i = 0; i < collidables.Length; i++)
+        {
+            var dist = (collidables[i].transform.position - pos).magnitude;
+            if (dist < 0.1f)
+            {
+                return false;
+            }
+        }
+
+        collidables = GameObject.FindGameObjectsWithTag("Destructible");
+
+        for (int i = 0; i < collidables.Length; i++)
+        {
+            var dist = (collidables[i].transform.position - pos).magnitude;
+            if (dist < 0.1f)
+            {
+                return false;
+            }
+        }
+
+        collidables = GameObject.FindGameObjectsWithTag("Movable");
+
+        for (int i = 0; i < collidables.Length; i++)
+        {
+            var dist = (collidables[i].transform.position - pos).magnitude;
+            if (dist < 0.1f)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 	void FindMovable(Vector3 pos)
 	{

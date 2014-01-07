@@ -62,7 +62,7 @@ namespace SokoBomber
 
 		private void PhoneApplicationPage_BackKeyPress(object sender, CancelEventArgs e)
 		{
-			e.Cancel = UnityApp.BackButtonPressed();
+			//e.Cancel = UnityApp.BackButtonPressed();
 		}
 
 		private void PhoneApplicationPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
