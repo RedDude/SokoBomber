@@ -25,6 +25,12 @@ public class Overlord : MonoBehaviour {
 			//Debug.Log ("Overlord: TurnTick for " + movables[i].ToString());
 			movables[i].SendMessage("TurnTick", null, SendMessageOptions.DontRequireReceiver);
 		}
+
+        var obj = GameObject.FindGameObjectWithTag("GameController");
+        if (obj != null)
+        {
+            obj.SendMessage("TurnTick", null, SendMessageOptions.DontRequireReceiver);
+        }
 	}
 
 	void OnGUI()
