@@ -13,7 +13,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 		for (int i = 0; i < currentProgress + 1; i++)
 		{
 			state2 += 1;
-			var o = Instantiate(buttonTemplate, new Vector3(1.5f * (state2 - 1), state1 * 1.5f, 0), Quaternion.identity) as GameObject;
+			var o = Instantiate(buttonTemplate, new Vector3(1.5f * (state2 - 1), state1 * -1.5f, 0), Quaternion.identity) as GameObject;
 			var cmpt = o.GetComponent<LevelButtonScript>();
 			
             cmpt.LevelToLoadId = i + 1;
@@ -27,10 +27,9 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 			}
 		}
 	}
-	//TODO: scrolling can be done using this object. Will worry about it later.
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

@@ -10,7 +10,11 @@ public class Overlord : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //reset this level
+            Application.LoadLevel(Application.loadedLevelName);
+        }
 	}
 
 	public void NextTurn()
@@ -31,6 +35,7 @@ public class Overlord : MonoBehaviour {
         {
             obj.SendMessage("TurnTick", null, SendMessageOptions.DontRequireReceiver);
         }
+
 	}
 
 	void OnGUI()
