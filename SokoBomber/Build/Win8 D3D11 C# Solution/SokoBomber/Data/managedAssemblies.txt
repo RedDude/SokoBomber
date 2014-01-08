@@ -1,3 +1,0 @@
-Boo.Lang.dll
-UnityScript.Lang.dll
-WinRTLegacy.dll
