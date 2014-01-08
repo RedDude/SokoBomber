@@ -20,7 +20,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
             cmpt.LevelToLoad = "Level" + cmpt.LevelToLoadId.ToString() + "Scene";
 
-			if (state2 == 1)
+			if (state2 == 2)
 			{
 				state2 = -1;
 				state1 += 1;

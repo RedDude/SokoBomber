@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Special\Level2\BombSuccess.cs" />
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
+     <Compile Include="Assets\Scripts\TestLevelHack.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

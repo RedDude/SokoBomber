@@ -9,9 +9,15 @@ public class IgniteManager : MonoBehaviour {
 	public AudioClip explodeClip = null;
 	public AudioClip blipClip = null;
 
+    public int BlastDistance = 10;
+
+    public bool FallsInHoles = false;
+
+    public GUIStyle style = new GUIStyle();
+    
 	// Use this for initialization
 	void Start () {
-	
+        
 	}
 	
 	// Update is called once per frame
@@ -30,6 +36,21 @@ public class IgniteManager : MonoBehaviour {
 
 	public void TurnTick()
 	{
+        //check that we are not over a hole if we are small
+        if (FallsInHoles)
+        {
+            var holes = GameObject.FindGameObjectsWithTag("Holes");
+
+            for (int i = 0; i < holes.Length; i++)
+            {
+                if ((this.transform.position - holes[i].transform.position).magnitude < 0.01f)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+        }
+
 		if (!IsIgnited) {
 				var igniters = GameObject.FindGameObjectsWithTag ("Ignite");
 
@@ -67,7 +88,7 @@ public class IgniteManager : MonoBehaviour {
 								//UP! - increased Y
 								Vector3 startPoint = this.transform.position;
 								bool up_done = false;
-								int m_d = 10;
+                                int m_d = BlastDistance;
 								while (!up_done && m_d > 0) {
 									Vector3 newPoint = startPoint + new Vector3 (0, 1, 0);
 
@@ -107,7 +128,7 @@ public class IgniteManager : MonoBehaviour {
 
 								startPoint = this.transform.position;
 								bool down_done = false;
-								m_d = 10;
+                                m_d = BlastDistance;
 								while (!down_done && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (0, -1, 0);
 					
@@ -147,7 +168,7 @@ public class IgniteManager : MonoBehaviour {
 
 								startPoint = this.transform.position;
 								bool left_done = false;
-								m_d = 10;
+                                m_d = BlastDistance;
 								while (!left_done && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (-1, 0, 0);
 					
@@ -187,7 +208,7 @@ public class IgniteManager : MonoBehaviour {
 
 								startPoint = this.transform.position;
 								bool right_down = false;
-								m_d = 10;
+                                m_d = BlastDistance;
 								while (!right_down && m_d > 0) {
 										Vector3 newPoint = startPoint + new Vector3 (1, 0, 0);
 					
@@ -250,4 +271,15 @@ public class IgniteManager : MonoBehaviour {
 
 		return null;
 	}
+
+    void OnGUI()
+    {
+
+        if (IsIgnited)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+            GUI.TextArea(new Rect(screenPos.x - 0.15f, Screen.height - (screenPos.y + 0.15f), 0.3f, 0.3f), Ticks.ToString(), style);
+        }
+
+    }
 }

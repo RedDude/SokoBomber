@@ -44,6 +44,6 @@ public class LevelButtonScript : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.TextArea(new Rect(screenPos.x - 0.25f, screenPos.y + 0.25f, 0.5f, 0.5f), LevelToLoadId.ToString(), GUIStyle.none);
+        GUI.TextArea(new Rect(screenPos.x - 0.25f, Screen.height - (screenPos.y + 0.25f), 0.5f, 0.5f), LevelToLoadId.ToString(), GUIStyle.none);
     }
 }
