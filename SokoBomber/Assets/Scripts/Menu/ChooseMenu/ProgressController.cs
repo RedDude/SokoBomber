@@ -5,6 +5,7 @@ public class ProgressController : MonoBehaviour {
 
 	public int CompletionProgress = 0;
     public int LoadedLevel = -1;
+    public int TotalLevelsCount = 6;
 
 	private static ProgressController _instance;
 	public static ProgressController Instance
@@ -25,6 +26,10 @@ public class ProgressController : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 
 		//Load level progress!
+        if (PlayerPrefs.HasKey("Progress_Beta"))
+        {
+            CompletionProgress = PlayerPrefs.GetInt("Progress_Beta");
+        }
 	}
 
 	// Use this for initialization
@@ -39,9 +44,10 @@ public class ProgressController : MonoBehaviour {
 
     public void CompleteLevel(int num)
     {
-        if (num == CompletionProgress + 1 && num < 6) //max - 1
+        if (num == CompletionProgress + 1 && num < TotalLevelsCount) //max - 1
         {
             CompletionProgress += 1;
+            PlayerPrefs.SetInt("Progress_Beta", CompletionProgress);
         }
     }
 }
