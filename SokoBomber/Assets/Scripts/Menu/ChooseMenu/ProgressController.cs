@@ -61,13 +61,17 @@ public class ProgressController : MonoBehaviour
         }
 
         var o = Instantiate(LevelEndObject) as GameObject;
-        if (Application.loadedLevelName != "Level2Scene")
+        if (Application.loadedLevelName == "Level2Scene")
         {
-            o.SendMessage("Success", 0, SendMessageOptions.DontRequireReceiver); //default success!
+            o.SendMessage("Success", 1, SendMessageOptions.DontRequireReceiver);
+        }
+        else if (Application.loadedLevelName == "Level9Scene")
+        {
+            o.SendMessage("Success", 2, SendMessageOptions.DontRequireReceiver);
         }
         else
         {
-            o.SendMessage("Success", 1, SendMessageOptions.DontRequireReceiver); //default success!
+            o.SendMessage("Success", 0, SendMessageOptions.DontRequireReceiver); //default success!
         }
     }
 
@@ -78,8 +82,8 @@ public class ProgressController : MonoBehaviour
     }
 
     public static float shakeInt = 0.0f;
-    float decrease = 5.0f;
-    float magnitude = 5.0f;
+    float decrease = 2.0f;
+    float magnitude = 2.0f;
 
     void CameraShake()
     {

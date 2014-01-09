@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Player\GoalScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Special\Level2\BombSuccess.cs" />
+     <Compile Include="Assets\Scripts\Special\Level9\HoleSuccess.cs" />
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
      <Compile Include="Assets\Scripts\TestLevelHack.cs" />
   </ItemGroup>

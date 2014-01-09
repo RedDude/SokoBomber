@@ -106,37 +106,37 @@ public class PlayerMovement : MonoBehaviour {
 			movingCollision = true;
 		}
 
-//		if (!moving)
-//		{
-//			if (Input.GetKey(KeyCode.S))
-//			{
-//				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
-//				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
-//				moving = true;
-//				movingCollision = true;
-//			}
-//			else if (Input.GetKey(KeyCode.W))
-//			{
-//				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
-//				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
-//				moving = true;
-//				movingCollision = true;
-//			}
-//			else if (Input.GetKey(KeyCode.A))
-//			{
-//				movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
-//				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
-//				moving = true;
-//				movingCollision = true;
-//			}
-//			else if (Input.GetKey(KeyCode.D))
-//			{
-//				movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
-//				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
-//				moving = true;
-//				movingCollision = true;
-//			}
-//		}
+		if (!moving)
+		{
+			if (Input.GetKey(KeyCode.S))
+			{
+				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
+				moving = true;
+				movingCollision = true;
+			}
+			else if (Input.GetKey(KeyCode.W))
+			{
+				movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
+				moving = true;
+				movingCollision = true;
+			}
+			else if (Input.GetKey(KeyCode.A))
+			{
+				movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
+				moving = true;
+				movingCollision = true;
+			}
+			else if (Input.GetKey(KeyCode.D))
+			{
+				movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
+				moving = true;
+				movingCollision = true;
+			}
+		}
 
 		if (movingCollision)
 		{ //do a collision check!
@@ -283,6 +283,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void Die()
 	{
+        ProgressController.Instance.FailLevel(0);
+
 		Destroy (this.gameObject);
 	}
 }

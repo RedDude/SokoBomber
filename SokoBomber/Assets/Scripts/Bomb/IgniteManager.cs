@@ -45,6 +45,7 @@ public class IgniteManager : MonoBehaviour {
             {
                 if ((this.transform.position - holes[i].transform.position).magnitude < 0.01f)
                 {
+                    gameObject.SendMessage("AfterFall", null, SendMessageOptions.DontRequireReceiver);
                     Destroy(gameObject);
                     return;
                 }

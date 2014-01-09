@@ -21,6 +21,7 @@ public class EndGameScreenScript : MonoBehaviour {
         switch (msg)
         {
             case 1: Message = "Oh no, you died! But that is quite alright, just remember bombs can kill you!"; break;
+            case 2: Message = "It looks like these small bombs fall through holes, but that is quite alright. Just remember this in future!"; break;
             default: Message = "You successfully completed the level!"; break;
         }
     }
