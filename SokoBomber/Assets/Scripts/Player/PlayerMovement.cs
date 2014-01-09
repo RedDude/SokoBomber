@@ -279,6 +279,11 @@ public class PlayerMovement : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.TextArea (new Rect (0, 0, 120, 20), this.transform.position.ToString ());
+
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit"))
+        {
+            Application.LoadLevel("ChooseLevelScene");
+        }
 	}
 
 	public void Die()

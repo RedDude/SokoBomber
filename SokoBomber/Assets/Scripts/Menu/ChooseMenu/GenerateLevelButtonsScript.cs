@@ -32,4 +32,31 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 	void Update () {
 
 	}
+
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(0, 0, 100, 100), "Up"))
+        {
+            var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+
+            for (int i = 0; i < objs.Length; i++)
+            {
+                objs[i].transform.Translate(new Vector3(0, -4.5f, 0));
+            }
+        }
+        if (GUI.Button(new Rect(0, 100, 100, 100), "Down"))
+        {
+            var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+
+            for (int i = 0; i < objs.Length; i++)
+            {
+                objs[i].transform.Translate(new Vector3(0, 4.5f, 0));
+            }
+        }
+
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit"))
+        {
+            Application.LoadLevel("MainMenuScene");
+        }
+    }
 }

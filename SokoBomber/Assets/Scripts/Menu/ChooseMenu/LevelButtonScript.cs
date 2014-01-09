@@ -6,6 +6,8 @@ public class LevelButtonScript : MonoBehaviour
     public string LevelToLoad = "";
     public int LevelToLoadId = -1;
 
+    public GUIStyle Style = new GUIStyle();
+
     // Use this for initialization
     void Start()
     {
@@ -29,11 +31,11 @@ public class LevelButtonScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            this.transform.Translate(new Vector3(0, -1.5f, 0) * Time.deltaTime);
+            this.transform.Translate(new Vector3(0, -3f, 0) * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            this.transform.Translate(new Vector3(0, 1.5f, 0) * Time.deltaTime);
+            this.transform.Translate(new Vector3(0, 3f, 0) * Time.deltaTime);
         }
 
         screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
@@ -44,6 +46,6 @@ public class LevelButtonScript : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.TextArea(new Rect(screenPos.x - 0.25f, Screen.height - (screenPos.y + 0.25f), 0.5f, 0.5f), LevelToLoadId.ToString(), GUIStyle.none);
+        GUI.TextArea(new Rect(screenPos.x - 0.25f, Screen.height - (screenPos.y + 0.25f), 0.5f, 0.5f), LevelToLoadId.ToString(), Style);
     }
 }
