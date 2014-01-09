@@ -252,6 +252,7 @@ public class IgniteManager : MonoBehaviour {
 								AudioSource.PlayClipAtPoint (explodeClip, this.transform.position, 0.5f);
 
                                 gameObject.SendMessage("AfterExplode", null, SendMessageOptions.DontRequireReceiver);
+                                ProgressController.shakeInt += 0.5f;
 
 								Destroy (gameObject);
 						}

@@ -22,7 +22,7 @@ public class GoalScript : MonoBehaviour {
             //player found me!
             ProgressController.Instance.CompleteLevel(ProgressController.Instance.LoadedLevel);
 
-            Application.LoadLevel("ChooseLevelScene");
+            //Application.LoadLevel("ChooseLevelScene");
         }
     }
 }

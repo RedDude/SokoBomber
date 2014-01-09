@@ -13,7 +13,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 		for (int i = 0; i < currentProgress + 1; i++)
 		{
 			state2 += 1;
-			var o = Instantiate(buttonTemplate, new Vector3(1.5f * (state2 - 1), state1 * -1.5f, 0), Quaternion.identity) as GameObject;
+			var o = Instantiate(buttonTemplate, new Vector3(2f * (state2 - 1), state1 * -2f, 0), Quaternion.identity) as GameObject;
 			var cmpt = o.GetComponent<LevelButtonScript>();
 			
             cmpt.LevelToLoadId = i + 1;
