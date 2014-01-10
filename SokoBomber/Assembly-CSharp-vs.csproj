@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\LevelButtonScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\ProgressController.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayButtonScript.cs" />
+     <Compile Include="Assets\Scripts\OnDestroySpawner.cs" />
      <Compile Include="Assets\Scripts\Overlord.cs" />
      <Compile Include="Assets\Scripts\PCG\PCGLevelScript.cs" />
      <Compile Include="Assets\Scripts\Player\GoalScript.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\Special\Level9\HoleSuccess.cs" />
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
      <Compile Include="Assets\Scripts\TestLevelHack.cs" />
+     <Compile Include="Assets\Scripts\WallFragmentsSorting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
