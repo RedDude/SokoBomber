@@ -88,17 +88,22 @@ public class ProgressController : MonoBehaviour
     void CameraShake()
     {
         var cam = Camera.main.transform;
-        if (shakeInt < 0)
-        {
-            shakeInt = 0;
-        }
         if (shakeInt != 0)
         {
             shakeInt -= 1 * decrease * shakeInt * Time.deltaTime;
+            if (shakeInt < 0.1f)
+            {
+                shakeInt = 0;
+            }
         }
         if (shakeInt > 0)
         {
             cam.Rotate(Random.Range(-magnitude * shakeInt, magnitude * shakeInt), Random.Range(-magnitude * shakeInt, magnitude * shakeInt), Random.Range(-magnitude * shakeInt, magnitude * shakeInt));
+        }
+
+        if (shakeInt == 0)
+        {
+            cam.rotation = Quaternion.Lerp(cam.rotation, Quaternion.identity, 0.1f);
         }
 
     }

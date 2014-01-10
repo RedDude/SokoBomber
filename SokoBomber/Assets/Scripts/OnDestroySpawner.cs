@@ -14,7 +14,7 @@ public class OnDestroySpawner : MonoBehaviour {
 	
 	}
 
-    void OnDestroy()
+    void OnCustomDestroy()
     {
         Instantiate(ToSpawn, this.transform.position, Quaternion.identity);
     }

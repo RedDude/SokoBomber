@@ -106,6 +106,8 @@ public class IgniteManager : MonoBehaviour {
 												up_done = true;
 										} else if (o_destr != null) {
 												//destructibles must die
+                                                o_destr.SendMessage("OnCustomDestroy", null, SendMessageOptions.DontRequireReceiver);
+
 												Destroy (o_destr);
 												up_done = true;
 										} else if (o_movable) {
@@ -146,6 +148,7 @@ public class IgniteManager : MonoBehaviour {
 												down_done = true;
 										} else if (o_destr != null) {
 												//destructibles must die
+                                                o_destr.SendMessage("OnCustomDestroy", null, SendMessageOptions.DontRequireReceiver);
 												Destroy (o_destr);
 												down_done = true;
 										} else if (o_movable) {
@@ -186,6 +189,7 @@ public class IgniteManager : MonoBehaviour {
 												left_done = true;
 										} else if (o_destr != null) {
 												//destructibles must die
+                                                o_destr.SendMessage("OnCustomDestroy", null, SendMessageOptions.DontRequireReceiver);
 												Destroy (o_destr);
 												left_done = true;
 										} else if (o_movable) {
@@ -226,6 +230,7 @@ public class IgniteManager : MonoBehaviour {
 												right_down = true;
 										} else if (o_destr != null) {
 												//destructibles must die
+                                                o_destr.SendMessage("OnCustomDestroy", null, SendMessageOptions.DontRequireReceiver);
 												Destroy (o_destr);
 												right_down = true;
 										} else if (o_movable) {
@@ -253,7 +258,7 @@ public class IgniteManager : MonoBehaviour {
 								AudioSource.PlayClipAtPoint (explodeClip, this.transform.position, 0.5f);
 
                                 gameObject.SendMessage("AfterExplode", null, SendMessageOptions.DontRequireReceiver);
-                                ProgressController.shakeInt += 0.5f;
+                                ProgressController.shakeInt += 1f;
 
 								Destroy (gameObject);
 						}
