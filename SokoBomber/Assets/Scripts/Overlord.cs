@@ -40,6 +40,6 @@ public class Overlord : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.TextArea (new Rect (0, 25, 120, 20), "Turns: " + TurnsTotal.ToString());
+		//GUI.TextArea (new Rect (0, 25, 120, 20), "Turns: " + TurnsTotal.ToString());
 	}
 }

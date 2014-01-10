@@ -35,7 +35,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(0, 0, 100, 100), "Up"))
+        if (GUI.Button(new Rect(0, 0, 100, 100), "Up", ProgressController.Instance.ButtonStyle))
         {
             var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
@@ -44,7 +44,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
                 objs[i].transform.Translate(new Vector3(0, -4.5f, 0));
             }
         }
-        if (GUI.Button(new Rect(0, 100, 100, 100), "Down"))
+        if (GUI.Button(new Rect(0, 100, 100, 100), "Down", ProgressController.Instance.ButtonStyle))
         {
             var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
@@ -54,7 +54,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
             }
         }
 
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit"))
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.ButtonStyle))
         {
             Application.LoadLevel("MainMenuScene");
         }

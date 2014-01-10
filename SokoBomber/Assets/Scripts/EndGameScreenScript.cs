@@ -4,9 +4,6 @@ using System.Collections;
 public class EndGameScreenScript : MonoBehaviour {
     public bool WasSuccessful = false;
 
-    public GUIStyle goodStyle = new GUIStyle();
-    public GUIStyle badStyle = new GUIStyle();
-
     private string Message = "No message? Something went wrong!";
 
 	// Use this for initialization
@@ -49,28 +46,28 @@ public class EndGameScreenScript : MonoBehaviour {
         
         if (WasSuccessful)
         {
-            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 100), Message, goodStyle);
+            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200), Message, ProgressController.Instance.SuccessNoticeStyle);
 
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Next Level", goodStyle))
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Proceed to Next Level", ProgressController.Instance.SuccessButtonStyle))
             {
                 Application.LoadLevel("ChooseLevelScene");
             }
 
-            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Replay"))
+            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Replay this Level", ProgressController.Instance.ButtonStyle))
             {
                 Application.LoadLevel(Application.loadedLevelName);
             }
         }
         else
         {
-            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 100), Message, badStyle);
+            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200), Message, ProgressController.Instance.FailNoticeStyle);
 
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Choose Level", badStyle))
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Choose Another Level", ProgressController.Instance.FailButtonStyle))
             {
                 Application.LoadLevel("ChooseLevelScene");
             }
 
-            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Retry"))
+            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Retry this Level", ProgressController.Instance.ButtonStyle))
             {
                 Application.LoadLevel(Application.loadedLevelName);
             }
