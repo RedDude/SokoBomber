@@ -20,6 +20,12 @@ public class PlayerMovement : MonoBehaviour {
 	private bool movingCollision;
 	private GameObject movableObject;
 	void Update () {
+        var o = GameObject.FindGameObjectWithTag("Finish");
+        if (o != null)
+        {
+            return;
+        }
+
 		Vector3 InWorldPos = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z)).GetPoint(10);
 
 //		if (Input.touchCount > 0 && !moving)
