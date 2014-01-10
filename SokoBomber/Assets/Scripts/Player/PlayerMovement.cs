@@ -161,12 +161,20 @@ public class PlayerMovement : MonoBehaviour {
 			var directVector = movementTargetPos - this.transform.position;
 			if (directVector.magnitude > 0.025f)
 			{
+                var magn = directVector.magnitude;
 				directVector.Normalize();
 
 				var mainDelta = MoveSpeedModifier * Time.deltaTime;
 
-				this.transform.Translate(mainDelta * directVector);
-				Camera.main.transform.Translate(mainDelta * directVector);
+                var moving_vector = mainDelta * directVector;
+
+                if (moving_vector.magnitude > magn)
+                {
+                    moving_vector = movementTargetPos - this.transform.position;
+                }
+
+                this.transform.Translate(moving_vector);
+                Camera.main.transform.Translate(moving_vector);
 
 				MoveMovableBy(mainDelta * directVector);
 			}
