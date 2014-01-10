@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour {
                 this.transform.Translate(moving_vector);
                 Camera.main.transform.Translate(moving_vector);
 
-				MoveMovableBy(mainDelta * directVector);
+                MoveMovableBy(moving_vector);
 			}
 			else
 			{
