@@ -4,11 +4,19 @@ using System.Collections;
 public class EndGameScreenScript : MonoBehaviour {
     public bool WasSuccessful = false;
 
+    public GUIStyle goodStyle = new GUIStyle();
+    public GUIStyle badStyle = new GUIStyle();
+
     private string Message = "No message? Something went wrong!";
 
 	// Use this for initialization
 	void Start () {
-		
+		//check if another instance exists:
+        var o = GameObject.FindGameObjectWithTag("Finish");
+        if (o != null && o != this.gameObject)
+        {
+            Destroy(o);
+        }
 	}
 	
 	// Update is called once per frame
@@ -24,6 +32,8 @@ public class EndGameScreenScript : MonoBehaviour {
             case 2: Message = "It looks like these small bombs fall through holes, but that is quite alright. Just remember this in future!"; break;
             default: Message = "You successfully completed the level!"; break;
         }
+
+        WasSuccessful = true;
     }
 
     void Failure(int msg)
@@ -36,11 +46,12 @@ public class EndGameScreenScript : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 100), Message);
-
+        
         if (WasSuccessful)
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Next Level"))
+            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 100), Message, goodStyle);
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Next Level", goodStyle))
             {
                 Application.LoadLevel("ChooseLevelScene");
             }
@@ -52,7 +63,9 @@ public class EndGameScreenScript : MonoBehaviour {
         }
         else
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Choose Level"))
+            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 100), Message, badStyle);
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Choose Level", badStyle))
             {
                 Application.LoadLevel("ChooseLevelScene");
             }
