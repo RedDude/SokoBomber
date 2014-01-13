@@ -19,10 +19,11 @@ public class LevelButtonScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 inWorld = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(10);
+            Ray sptoRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 inWorld = sptoRay.GetPoint(-sptoRay.origin.z);
 
-            if ((inWorld.x > this.transform.position.x - 0.5) && (inWorld.x < this.transform.position.x + 0.5) &&
-                    (inWorld.y > this.transform.position.y - 0.5) && (inWorld.y < this.transform.position.y + 0.5))
+            if ((inWorld.x > this.transform.position.x - 0.75) && (inWorld.x < this.transform.position.x + 0.75) &&
+                    (inWorld.y > this.transform.position.y - 0.75) && (inWorld.y < this.transform.position.y + 0.75))
             {
                 ProgressController.Instance.LoadedLevel = LevelToLoadId;
                 Application.LoadLevel(LevelToLoad);
@@ -47,5 +48,8 @@ public class LevelButtonScript : MonoBehaviour
     void OnGUI()
     {
         GUI.TextArea(new Rect(screenPos.x - 0.25f, Screen.height - (screenPos.y + 0.25f), 0.5f, 0.5f), LevelToLoadId.ToString(), Style);
+
+        //var pos = Camera.main.WorldToScreenPoint(this.transform.position);
+        //GUI.TextArea(new Rect(pos.x - 75,Screen.height - pos.y - 75, 150, 150), " ");
     }
 }

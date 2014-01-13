@@ -4,6 +4,9 @@ using System.Collections;
 public class GenerateLevelButtonsScript : MonoBehaviour {
 	public GameObject buttonTemplate = null;
 
+    public GameObject UpTemplate = null;
+    public GameObject DownTemplate = null;
+
 	// Use this for initialization
 	void Start () {
 		int currentProgress = ProgressController.Instance.CompletionProgress;
@@ -26,35 +29,100 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 				state1 += 1;
 			}
 		}
+
+        Instantiate(UpTemplate, upButton, Quaternion.identity);
+        Instantiate(DownTemplate, downButton, Quaternion.identity);
 	}
-	
+
+    Vector3 upButton = new Vector3(-4f, 1.5f, 0f);
+    Vector3 downButton = new Vector3(-4f, 0, 0f);
+
 	// Update is called once per frame
 	void Update () {
+        Ray sptoRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 inWorld = sptoRay.GetPoint(-sptoRay.origin.z);
 
+        if (Input.GetMouseButton(0))
+        {
+
+            if ((inWorld.x > upButton.x - 0.5) && (inWorld.x < upButton.x + 0.5) &&
+                    (inWorld.y > upButton.y - 0.5) && (inWorld.y < upButton.y + 0.5))
+            {
+                var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+
+                var offsetAmmount = new Vector3(0, -4.5f, 0) * Time.deltaTime;
+                if (offsetAmmount.y + CurrentOffset > MinOffset)
+                {
+                    CurrentOffset += offsetAmmount.y;
+                    for (int i = 0; i < objs.Length; i++)
+                    {
+                        objs[i].transform.Translate(offsetAmmount);
+                    }
+                }
+            }
+
+            if ((inWorld.x > downButton.x - 0.5) && (inWorld.x < downButton.x + 0.5) &&
+                    (inWorld.y > downButton.y - 0.5) && (inWorld.y < downButton.y + 0.5))
+            {
+                var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+
+                var offsetAmmount = new Vector3(0, 4.5f, 0) * Time.deltaTime;
+
+                if (offsetAmmount.y + CurrentOffset < MaxOffset)
+                {
+                    CurrentOffset += offsetAmmount.y;
+                    for (int i = 0; i < objs.Length; i++)
+                    {
+                        objs[i].transform.Translate(offsetAmmount);
+                    }
+                }
+            }
+        }
 	}
+
+    float MaxOffset = 7f;
+    float MinOffset = 0f;
+    float CurrentOffset = 0f;
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(0, 0, 100, 100), "Up", ProgressController.Instance.ButtonStyle))
-        {
-            var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+        //Vector3 wtspUp = Camera.main.WorldToScreenPoint(upButton);
+        //Vector3 wtspDown = Camera.main.WorldToScreenPoint(downButton);
+        //
+        //GUI.TextArea(new Rect(wtspUp.x - 15, Screen.height - wtspUp.y - 50, 100, 100), "Up");
+        //GUI.TextArea(new Rect(wtspDown.x - 15, Screen.height - wtspDown.y - 50, 100, 100), "Down");
 
-            for (int i = 0; i < objs.Length; i++)
-            {
-                objs[i].transform.Translate(new Vector3(0, -4.5f, 0));
-            }
-        }
-        if (GUI.Button(new Rect(0, 100, 100, 100), "Down", ProgressController.Instance.ButtonStyle))
-        {
-            var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+        //if (GUI.Button(new Rect(0, 0, 100, 100), "Up", ProgressController.Instance.ButtonStyle))
+        //{
+        //    var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+        //
+        //    var offsetAmmount = new Vector3(0, -4.5f, 0) * Time.deltaTime;
+        //    if (offsetAmmount.y + CurrentOffset > MinOffset)
+        //    {
+        //        CurrentOffset += offsetAmmount.y;
+        //        for (int i = 0; i < objs.Length; i++)
+        //        {
+        //            objs[i].transform.Translate(offsetAmmount);
+        //        }
+        //    }
+        //}
+        //if (GUI.Button(new Rect(0, 100, 100, 100), "Down", ProgressController.Instance.ButtonStyle))
+        //{
+        //    var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+        //
+        //    var offsetAmmount = new Vector3(0, 4.5f, 0) * Time.deltaTime;
+        //
+        //    if (offsetAmmount.y + CurrentOffset < MaxOffset)
+        //    {
+        //        CurrentOffset += offsetAmmount.y;
+        //        for (int i = 0; i < objs.Length; i++)
+        //        {
+        //            objs[i].transform.Translate(offsetAmmount);
+        //        }
+        //    }
+        //}
 
-            for (int i = 0; i < objs.Length; i++)
-            {
-                objs[i].transform.Translate(new Vector3(0, 4.5f, 0));
-            }
-        }
-
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.ButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Back To Menu", ProgressController.Instance.ButtonStyle))
         {
             Application.LoadLevel("MainMenuScene");
         }

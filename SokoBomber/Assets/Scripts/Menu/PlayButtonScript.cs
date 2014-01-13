@@ -12,7 +12,9 @@ public class PlayButtonScript : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButtonDown(0))
 		{
-			Vector3 inWorld = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(10);
+            Ray sptoRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 inWorld = sptoRay.GetPoint(-sptoRay.origin.z);
+            
 			
 			if ((inWorld.x > this.transform.position.x - 1) && (inWorld.x < this.transform.position.x + 1) &&
 			    (inWorld.y > this.transform.position.y - 0.25) && (inWorld.y < this.transform.position.y + 0.25))
