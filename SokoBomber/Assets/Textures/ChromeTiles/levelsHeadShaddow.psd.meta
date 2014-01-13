@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 95a139e33fd1b03448013cc98f9767dd
+guid: 236083e76a590b64a933d1b77a4f9ddf
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -20,53 +20,26 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 0
+    filterMode: -1
     aniso: 1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 28
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: menu_0
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 18
-        width: 166
-        height: 234
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: menu_1
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 216
-        width: 65
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: menu_2
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 181
-        width: 65
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
