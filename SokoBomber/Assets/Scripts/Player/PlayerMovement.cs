@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
 	private Vector3 movableTargetPos;
 	private bool movingCollision;
 	private GameObject movableObject;
+    private Vector3 slideEndPos = new Vector3();
+    private bool sliding = false;
 	void Update () {
         var o = GameObject.FindGameObjectWithTag("Finish");
         if (o != null)
@@ -28,50 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		Vector3 InWorldPos = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.z)).GetPoint(10);
 
-//		if (Input.touchCount > 0 && !moving)
-//		{
-//			var touch = Input.GetTouch(0);
-//			InWorldPos = Camera.main.ScreenPointToRay(touch.position).GetPoint(10);
-//
-//			Vector3 mouseDir = InWorldPos - this.transform.position;
-//			//get the direction
-//			if (Mathf.Abs(mouseDir.x) > Mathf.Abs(mouseDir.y))
-//			{
-//				//larger X movement
-//				if (mouseDir.x < 0)
-//				{
-//					//move left
-//					movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
-//					movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
-//				}
-//				else if (mouseDir.x >= 0)
-//				{
-//					//move right
-//					movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
-//					movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
-//				}
-//			}
-//			else if (Mathf.Abs(mouseDir.x) <= Mathf.Abs(mouseDir.y))
-//			{
-//				//Larger z movement
-//				if (mouseDir.y < 0)
-//				{
-//					//move up
-//					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
-//					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
-//				}
-//				else if (mouseDir.y >= 0)
-//				{
-//					//move down
-//					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
-//					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
-//				}
-//			}
-//			
-//			moving = true;
-//			movingCollision = true;
-//		}
-		if (Input.GetMouseButton(0) && !moving) //On click/tap
+		if (Input.GetMouseButton(0) && !moving && !sliding) //On click/tap
 		{
 			Vector3 mouseDir = InWorldPos - this.transform.position;
 			//get the direction
@@ -162,15 +121,15 @@ public class PlayerMovement : MonoBehaviour {
 			movingCollision = false;
 		}
 
-		if (moving)
-		{
-			var directVector = movementTargetPos - this.transform.position;
-			if (directVector.magnitude > 0.025f)
-			{
+        if (moving)
+        {
+            var directVector = movementTargetPos - this.transform.position;
+            if (directVector.magnitude > 0.025f)
+            {
                 var magn = directVector.magnitude;
-				directVector.Normalize();
+                directVector.Normalize();
 
-				var mainDelta = MoveSpeedModifier * Time.deltaTime;
+                var mainDelta = MoveSpeedModifier * Time.deltaTime;
 
                 var moving_vector = mainDelta * directVector;
 
@@ -183,22 +142,105 @@ public class PlayerMovement : MonoBehaviour {
                 Camera.main.transform.Translate(moving_vector);
 
                 MoveMovableBy(moving_vector);
-			}
-			else
-			{
-				moving = false;
+            }
+            else
+            {
+                moving = false;
 
-				Camera.main.transform.Translate(movementTargetPos - this.transform.position);
+                Camera.main.transform.Translate(movementTargetPos - this.transform.position);
 
-				MoveMovableBy(movementTargetPos - this.transform.position);
+                MoveMovableBy(movementTargetPos - this.transform.position);
 
-				this.transform.Translate(movementTargetPos - this.transform.position);
+                this.transform.Translate(movementTargetPos - this.transform.position);
 
-				var obj = GameObject.FindGameObjectWithTag("Overlord");
+                var ice_o = FindIceAt(this.transform.position);
+                if (ice_o != null)
+                {
+                    Debug.Log("Found ice!");
+                    var slideDir = movableTargetPos - movementTargetPos;
 
-				obj.SendMessage("NextTurn");
-			}
-		}
+                    bool foundLast = false;
+                    int len = 10;
+
+                    int slide_mod = 0;
+
+                    while (!foundLast && len > 0)
+                    {
+                        len--;
+                        slide_mod++;
+
+                        var checkingPos = this.transform.position + (slide_mod * slideDir);
+
+                        var coll = FindCollidableAt(checkingPos); //IsCollisionFree is boolean, nub Ernest
+                        var mov = FindMovableAt(checkingPos);
+                        var ice_coll = FindIceAt(checkingPos);
+
+                        if (ice_coll == null)
+                        {
+                            foundLast = true;
+                        }
+
+                        if (coll != null)
+                        {
+                            foundLast = true;
+                            slide_mod -= 1;
+                        }
+                        else if (mov != null)
+                        {
+                            foundLast = true;
+                            slide_mod -= 1;
+                        }
+
+                        //if (coll != null || mov != null)
+                        //{
+                        //    foundLast = true;
+                        //    Debug.Log("Hit solid object after ice");
+                        //}
+
+                        //if (ice_coll == null) //bug with ice here potentially
+                        //{
+                        //    foundLast = true;
+                        //    slide_mod += 1;
+                        //    Debug.Log("Hit normal floor after ice");
+                        //}
+                    }
+
+                    var tmp_vect = this.transform.position + ((slide_mod) * slideDir);
+                    slideEndPos.Set(tmp_vect.x, tmp_vect.y, tmp_vect.z);
+
+                    sliding = true;
+                    Debug.Log("Commence ice slide lerp!");
+                }
+                else
+                {
+                    Debug.Log("No ice found");
+
+                    var obj = GameObject.FindGameObjectWithTag("Overlord");
+
+                    obj.SendMessage("NextTurn");
+                }
+            }
+        }
+        
+        if (sliding) //slide lerp
+        {
+            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.5f);
+            Vector3 trans_pos = this.transform.position - new_pos;
+            this.transform.Translate(-trans_pos);
+            Camera.main.transform.Translate(-trans_pos);
+
+            if ((this.transform.position - slideEndPos).magnitude < 0.01f)
+            {
+                Camera.main.transform.Translate(slideEndPos - this.transform.position);
+                this.transform.Translate(slideEndPos - this.transform.position); //end up at the EXACT co-ord
+                sliding = false;
+
+                var obj = GameObject.FindGameObjectWithTag("Overlord");
+
+                obj.SendMessage("NextTurn");
+            }
+
+        }
 	}
 
     bool IsCollisionFree(Vector3 pos)
@@ -309,4 +351,51 @@ public class PlayerMovement : MonoBehaviour {
 
 		Destroy (this.gameObject);
 	}
+
+    private GameObject FindIceAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Ice");
+        Debug.Log("Finding ice at " + pos.ToString());
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            Debug.Log("Ice #" + (i + 1).ToString() + ": " + objs[i].transform.position.ToString());
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindMovableAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Movable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindCollidableAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Collidable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
 }
