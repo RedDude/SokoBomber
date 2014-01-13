@@ -55,7 +55,7 @@ public class ProgressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CameraShake();
+
     }
 
     public void CompleteLevel(int num)
@@ -85,32 +85,5 @@ public class ProgressController : MonoBehaviour
     {
         var o = Instantiate(LevelEndObject) as GameObject;
         o.SendMessage("Failure", num, SendMessageOptions.DontRequireReceiver); //default success!
-    }
-
-    public static float shakeInt = 0.0f;
-    float decrease = 2.0f;
-    float magnitude = 2.0f;
-
-    void CameraShake()
-    {
-        var cam = Camera.main.transform;
-        if (shakeInt != 0)
-        {
-            shakeInt -= 1 * decrease * shakeInt * Time.deltaTime;
-            if (shakeInt < 0.1f)
-            {
-                shakeInt = 0;
-            }
-        }
-        if (shakeInt > 0)
-        {
-            cam.Rotate(Random.Range(-magnitude * shakeInt, magnitude * shakeInt), Random.Range(-magnitude * shakeInt, magnitude * shakeInt), Random.Range(-magnitude * shakeInt, magnitude * shakeInt));
-        }
-
-        if (shakeInt == 0)
-        {
-            cam.rotation = Quaternion.Lerp(cam.rotation, Quaternion.identity, 0.1f);
-        }
-
     }
 }

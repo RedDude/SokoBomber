@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bomb\IgniteManager.cs" />
+     <Compile Include="Assets\Scripts\Bomb\ScreenShakeManager.cs" />
      <Compile Include="Assets\Scripts\EndGameScreenScript.cs" />
      <Compile Include="Assets\Scripts\ExplosionAnimate.cs" />
      <Compile Include="Assets\Scripts\FlavourTile.cs" />
