@@ -156,7 +156,18 @@ public class PlayerMovement : MonoBehaviour {
                 var ice_o = FindIceAt(this.transform.position);
                 if (ice_o != null)
                 {
-                    Debug.Log("Found ice!");
+                    var movedDir = movableTargetPos - movementTargetPos; //we arent sliding, but check if there is a bomb that needs to slide:
+
+                    if (movableObject != null)
+                    {
+                        var ice_obj = FindIceAt(this.transform.position + movedDir);
+
+                        if (ice_obj != null)
+                        {
+                            movableObject.SendMessage("Slide", movedDir, SendMessageOptions.DontRequireReceiver);
+                        }
+                    }
+
                     var slideDir = movableTargetPos - movementTargetPos;
 
                     bool foundLast = false;
@@ -191,29 +202,26 @@ public class PlayerMovement : MonoBehaviour {
                             slide_mod -= 1;
                         }
 
-                        //if (coll != null || mov != null)
-                        //{
-                        //    foundLast = true;
-                        //    Debug.Log("Hit solid object after ice");
-                        //}
-
-                        //if (ice_coll == null) //bug with ice here potentially
-                        //{
-                        //    foundLast = true;
-                        //    slide_mod += 1;
-                        //    Debug.Log("Hit normal floor after ice");
-                        //}
                     }
 
                     var tmp_vect = this.transform.position + ((slide_mod) * slideDir);
                     slideEndPos.Set(tmp_vect.x, tmp_vect.y, tmp_vect.z);
 
                     sliding = true;
-                    Debug.Log("Commence ice slide lerp!");
                 }
                 else
                 {
-                    Debug.Log("No ice found");
+                    var movedDir = movableTargetPos - movementTargetPos; //we arent sliding, but check if there is a bomb that needs to slide:
+
+                    if (movableObject != null)
+                    {
+                        var ice_obj = FindIceAt(this.transform.position + movedDir);
+
+                        if (ice_obj != null)
+                        {
+                            movableObject.SendMessage("Slide", movedDir, SendMessageOptions.DontRequireReceiver);
+                        }
+                    }
 
                     var obj = GameObject.FindGameObjectWithTag("Overlord");
 
@@ -355,11 +363,9 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject FindIceAt(Vector3 pos)
     {
         var objs = GameObject.FindGameObjectsWithTag("Ice");
-        Debug.Log("Finding ice at " + pos.ToString());
 
         for (int i = 0; i < objs.Length; i++)
         {
-            Debug.Log("Ice #" + (i + 1).ToString() + ": " + objs[i].transform.position.ToString());
             if ((objs[i].transform.position - pos).magnitude < 0.01f)
             {
                 return objs[i];

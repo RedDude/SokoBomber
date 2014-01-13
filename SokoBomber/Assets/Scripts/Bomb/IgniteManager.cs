@@ -22,7 +22,19 @@ public class IgniteManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (sliding) //slide lerp
+        {
+            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.5f);
+            Vector3 trans_pos = this.transform.position - new_pos;
+            this.transform.Translate(-trans_pos);
+
+            if ((this.transform.position - slideEndPos).magnitude < 0.01f)
+            {
+                this.transform.Translate(slideEndPos - this.transform.position); //end up at the EXACT co-ord
+                sliding = false;
+            }
+
+        }
 	}
 
 	public void Ignite(int ticks)
@@ -288,5 +300,95 @@ public class IgniteManager : MonoBehaviour {
             GUI.TextArea(new Rect(screenPos.x - 0.15f, Screen.height - (screenPos.y + 0.15f), 0.3f, 0.3f), Ticks.ToString(), style);
         }
 
+    }
+
+    void Slide(Vector3 slideDir)
+    {
+        bool foundLast = false;
+        int len = 10;
+
+        int slide_mod = 0;
+
+        while (!foundLast && len > 0)
+        {
+            len--;
+            slide_mod++;
+
+            var checkingPos = this.transform.position + (slide_mod * slideDir);
+
+            var coll = FindCollidableAt(checkingPos); //IsCollisionFree is boolean, nub Ernest
+            var mov = FindMovableAt(checkingPos);
+            var ice_coll = FindIceAt(checkingPos);
+
+            if (ice_coll == null)
+            {
+                foundLast = true;
+            }
+
+            if (coll != null)
+            {
+                foundLast = true;
+                slide_mod -= 1;
+            }
+            else if (mov != null)
+            {
+                foundLast = true;
+                slide_mod -= 1;
+            }
+
+        }
+
+        var tmp_vect = this.transform.position + ((slide_mod) * slideDir);
+        slideEndPos.Set(tmp_vect.x, tmp_vect.y, tmp_vect.z);
+
+        sliding = true;
+    }
+
+    Vector3 slideEndPos = new Vector3();
+    bool sliding = false;
+
+    private GameObject FindIceAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Ice");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindMovableAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Movable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindCollidableAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Collidable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
     }
 }
