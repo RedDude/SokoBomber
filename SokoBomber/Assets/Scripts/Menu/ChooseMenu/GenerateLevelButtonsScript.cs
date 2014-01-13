@@ -7,6 +7,8 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
     public GameObject UpTemplate = null;
     public GameObject DownTemplate = null;
 
+    public float ScrollSpeed = 4.5f;
+
 	// Use this for initialization
 	void Start () {
 		int currentProgress = ProgressController.Instance.CompletionProgress;
@@ -30,6 +32,18 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 			}
 		}
 
+        MaxOffset = 2f * state1;
+        CurrentOffset = MaxOffset;
+
+        var objs = GameObject.FindGameObjectsWithTag("LevelButton");
+
+        var offsetAmmount = new Vector3(0, MaxOffset, 0);
+        for (int i = 0; i < objs.Length; i++)
+        {
+            objs[i].transform.Translate(offsetAmmount);
+        }
+
+
         Instantiate(UpTemplate, upButton, Quaternion.identity);
         Instantiate(DownTemplate, downButton, Quaternion.identity);
 	}
@@ -50,7 +64,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
             {
                 var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
-                var offsetAmmount = new Vector3(0, -4.5f, 0) * Time.deltaTime;
+                var offsetAmmount = new Vector3(0, -ScrollSpeed, 0) * Time.deltaTime;
                 if (offsetAmmount.y + CurrentOffset > MinOffset)
                 {
                     CurrentOffset += offsetAmmount.y;
@@ -66,7 +80,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
             {
                 var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
-                var offsetAmmount = new Vector3(0, 4.5f, 0) * Time.deltaTime;
+                var offsetAmmount = new Vector3(0, ScrollSpeed, 0) * Time.deltaTime;
 
                 if (offsetAmmount.y + CurrentOffset < MaxOffset)
                 {
