@@ -42,4 +42,9 @@ public class Overlord : MonoBehaviour {
 	{
 		//GUI.TextArea (new Rect (0, 25, 120, 20), "Turns: " + TurnsTotal.ToString());
 	}
+
+    public int GetTurnCount()
+    {
+        return TurnsTotal;
+    }
 }
