@@ -25,6 +25,8 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
             cmpt.LevelToLoad = "Level" + cmpt.LevelToLoadId.ToString() + "Scene";
 
+            ProgressController.Instance.SpawnStarAt(ProgressController.Instance.ReadStarLevel(i + 1), new Vector3(2f * (state2 - 1) - 0.5f, state1 * -2f +0.5f, 0));
+
 			if (state2 == 2)
 			{
 				state2 = -1;
@@ -48,7 +50,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
         Instantiate(DownTemplate, downButton, Quaternion.identity);
 	}
 
-    Vector3 upButton = new Vector3(-4f, 1.5f, 0f);
+    Vector3 upButton = new Vector3(-4f, 2f, 0f);
     Vector3 downButton = new Vector3(-4f, 0, 0f);
 
 	// Update is called once per frame
@@ -59,8 +61,8 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
 
-            if ((inWorld.x > upButton.x - 0.5) && (inWorld.x < upButton.x + 0.5) &&
-                    (inWorld.y > upButton.y - 0.5) && (inWorld.y < upButton.y + 0.5))
+            if ((inWorld.x > upButton.x - 0.75) && (inWorld.x < upButton.x + 0.75) &&
+                    (inWorld.y > upButton.y - 0.75) && (inWorld.y < upButton.y + 0.75))
             {
                 var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
@@ -75,8 +77,8 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
                 }
             }
 
-            if ((inWorld.x > downButton.x - 0.5) && (inWorld.x < downButton.x + 0.5) &&
-                    (inWorld.y > downButton.y - 0.5) && (inWorld.y < downButton.y + 0.5))
+            if ((inWorld.x > downButton.x - 0.75) && (inWorld.x < downButton.x + 0.75) &&
+                    (inWorld.y > downButton.y - 0.75) && (inWorld.y < downButton.y + 0.75))
             {
                 var objs = GameObject.FindGameObjectsWithTag("LevelButton");
 
