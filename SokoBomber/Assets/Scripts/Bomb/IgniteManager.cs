@@ -24,7 +24,7 @@ public class IgniteManager : MonoBehaviour {
 	void Update () {
         if (sliding) //slide lerp
         {
-            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.5f);
+            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.2f);
             Vector3 trans_pos = this.transform.position - new_pos;
             this.transform.Translate(-trans_pos);
 
@@ -32,6 +32,33 @@ public class IgniteManager : MonoBehaviour {
             {
                 this.transform.Translate(slideEndPos - this.transform.position); //end up at the EXACT co-ord
                 sliding = false;
+
+                //check if on an igniter!
+
+                	var igniters = GameObject.FindGameObjectsWithTag ("Ignite");
+
+                    for (int i = 0; i < igniters.Length; i++)
+                    {
+                        if ((this.transform.position - igniters[i].transform.position).magnitude < 0.2f)
+                        {
+                            if (igniters[i].GetComponent(typeof(IgniterTimer)) != null)
+                            {
+                                var timer_ammt = (igniters[i].GetComponent<IgniterTimer>() as IgniterTimer).Ticks;
+                                if (timer_ammt != 0)
+                                {
+                                    Ignite(timer_ammt);
+                                }
+                                else
+                                {
+                                    Ignite(1);
+                                    this.gameObject.SendMessage("TurnTick");
+                                }
+
+                                return;
+                            }
+                        }
+                    }
+
             }
 
         }

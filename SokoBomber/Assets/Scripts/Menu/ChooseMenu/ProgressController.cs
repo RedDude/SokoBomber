@@ -141,7 +141,7 @@ public class ProgressController : MonoBehaviour
         StarRequirements.Add(new Vector2(61,71)); //14
         StarRequirements.Add(new Vector2(15,15)); //15
         StarRequirements.Add(new Vector2(98,112)); //16
-        //StarRequirements.Add(new Vector2(,)); //17
+        StarRequirements.Add(new Vector2(37,43)); //17
         //StarRequirements.Add(new Vector2(,)); //18
         //StarRequirements.Add(new Vector2(,)); //19
         //StarRequirements.Add(new Vector2(,)); //20
