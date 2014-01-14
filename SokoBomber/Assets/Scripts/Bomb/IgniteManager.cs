@@ -4,7 +4,14 @@ using System.Collections;
 public class IgniteManager : MonoBehaviour {
 	public bool IsIgnited = false;
 	public int Ticks = 2;
-	public GameObject ExplosionObject = null;
+	public GameObject ExplosionCenter = null;
+    public GameObject ExplosionUpDown = null;
+    public GameObject ExplosionLeftRight = null;
+
+    public GameObject ExplosionCapLeft = null;
+    public GameObject ExplosionCapRight = null;
+    public GameObject ExplosionCapUp = null;
+    public GameObject ExplosionCapDown = null;
 
 	public AudioClip explodeClip = null;
 	public AudioClip blipClip = null;
@@ -161,11 +168,19 @@ public class IgniteManager : MonoBehaviour {
 												up_done = true;
 										}
 
-										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
+
+                                        m_d -= 1;
+
+                                        if (!up_done && m_d > 0)
+                                        {
+                                            Instantiate(ExplosionUpDown, newPoint, Quaternion.identity);
+                                        }
+                                        else
+                                        {
+                                            Instantiate(ExplosionCapUp, newPoint, Quaternion.identity);
+                                        }
 
 										startPoint = newPoint;
-
-										m_d -= 1;
 								}
 
 								startPoint = this.transform.position;
@@ -202,11 +217,18 @@ public class IgniteManager : MonoBehaviour {
 												down_done = true;
 										}
 
-										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
+                                        m_d -= 1;
+
+                                        if (!down_done && m_d > 0)
+                                        {
+                                            Instantiate(ExplosionUpDown, newPoint, Quaternion.identity);
+                                        }
+                                        else
+                                        {
+                                            Instantiate(ExplosionCapDown, newPoint, Quaternion.identity);
+                                        }
 					
 										startPoint = newPoint;
-
-										m_d -= 1;
 								}
 
 								startPoint = this.transform.position;
@@ -245,9 +267,17 @@ public class IgniteManager : MonoBehaviour {
 					
 										startPoint = newPoint;
 
-										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
 
-										m_d -= 1;
+                                        m_d -= 1;
+
+                                        if (!left_done && m_d > 0)
+                                        {
+                                            Instantiate(ExplosionLeftRight, newPoint, Quaternion.identity);
+                                        }
+                                        else
+                                        {
+                                            Instantiate(ExplosionCapLeft, newPoint, Quaternion.identity);
+                                        }
 								}
 
 								startPoint = this.transform.position;
@@ -284,15 +314,24 @@ public class IgniteManager : MonoBehaviour {
 												right_down = true;
 										}
 
-										Instantiate (ExplosionObject, newPoint, Quaternion.identity);
-					
+
+                                        m_d -= 1;
+
+                                        if (!right_down && m_d > 0)
+                                        {
+                                            Instantiate(ExplosionLeftRight, newPoint, Quaternion.identity);
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("Made a right cap like I should.");
+                                            Instantiate(ExplosionCapRight, newPoint, Quaternion.identity);
+                                        }
 										startPoint = newPoint;
 
-										m_d -= 1;
 								}
 
 
-								Instantiate (ExplosionObject, this.transform.position, Quaternion.identity);
+								Instantiate (ExplosionCenter, this.transform.position, Quaternion.identity);
 
 								AudioSource.PlayClipAtPoint (explodeClip, this.transform.position, 0.5f);
 
