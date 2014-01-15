@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 			movingCollision = true;
 		}
 
-		if (!moving)
+		if (!moving && !sliding)
 		{
 			if (Input.GetKey(KeyCode.S))
 			{

@@ -50,7 +50,15 @@ public class EndGameScreenScript : MonoBehaviour {
 
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Proceed to Next Level", ProgressController.Instance.SuccessButtonStyle))
             {
-                Application.LoadLevel("ChooseLevelScene");
+                if (ProgressController.Instance.LoadedLevel < ProgressController.Instance.TotalLevelsCount - 1)
+                {
+                    ProgressController.Instance.LoadedLevel += 1;
+                    Application.LoadLevel("Level" + (ProgressController.Instance.LoadedLevel).ToString() + "Scene");
+                }
+                else
+                {
+                    Application.LoadLevel("ChooseLevelScene");
+                }
             }
 
             if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Replay this Level", ProgressController.Instance.ButtonStyle))
