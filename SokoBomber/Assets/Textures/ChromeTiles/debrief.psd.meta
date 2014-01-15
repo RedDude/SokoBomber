@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73451551c4af4634cb142b1c59e7a0e9
+guid: f88038d9a0f961a4db84dd1f38ef279b
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -41,32 +41,68 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: UpDownButton_0
+    - name: debrief_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 66
+        y: 151
+        width: 214
+        height: 295
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: UpDownButton_1
+    - name: debrief_3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 312
+        y: 308
+        width: 60
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: UpDownButton_2
+    - name: debrief_8
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
+        x: 312
+        y: 240
+        width: 60
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
+    - name: debrief_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 388
+        width: 51
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: debrief_4
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 329
+        width: 51
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: debrief_5
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 267
+        width: 51
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: debrief_6
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 207
+        width: 51
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 

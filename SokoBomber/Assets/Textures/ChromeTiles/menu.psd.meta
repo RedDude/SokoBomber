@@ -44,28 +44,28 @@ TextureImporter:
     - name: menu_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 18
-        width: 166
-        height: 234
+        x: 24
+        y: 58
+        width: 258
+        height: 426
       alignment: 0
       pivot: {x: 0, y: 0}
     - name: menu_1
       rect:
         serializedVersion: 2
-        x: 176
-        y: 216
-        width: 65
-        height: 31
+        x: 302
+        y: 190
+        width: 132
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
     - name: menu_2
       rect:
         serializedVersion: 2
-        x: 176
-        y: 181
-        width: 65
-        height: 31
+        x: 302
+        y: 109
+        width: 133
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
   spritePackingTag: 
