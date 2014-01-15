@@ -45,12 +45,48 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 58
+        y: 268
         width: 258
-        height: 426
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
     - name: menu_1
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 435
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: menu_2
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 434
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: menu_3
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 358
+        width: 46
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: menu_4
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 38
+        width: 232
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: menu_5
       rect:
         serializedVersion: 2
         x: 302
@@ -59,7 +95,7 @@ TextureImporter:
         height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: menu_2
+    - name: menu_6
       rect:
         serializedVersion: 2
         x: 302
