@@ -41,7 +41,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: debrief_0
+    - name: debrief_board
       rect:
         serializedVersion: 2
         x: 66
@@ -49,8 +49,8 @@ TextureImporter:
         width: 214
         height: 295
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: debrief_3
+      pivot: {x: .5, y: .5}
+    - name: debrief_resetButton
       rect:
         serializedVersion: 2
         x: 312
@@ -58,8 +58,8 @@ TextureImporter:
         width: 60
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: debrief_8
+      pivot: {x: .5, y: .5}
+    - name: debrief_playButton
       rect:
         serializedVersion: 2
         x: 312
@@ -67,8 +67,8 @@ TextureImporter:
         width: 60
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: debrief_3
+      pivot: {x: .5, y: .5}
+    - name: debrief_defaultStar
       rect:
         serializedVersion: 2
         x: 384
@@ -77,7 +77,7 @@ TextureImporter:
         height: 49
       alignment: 0
       pivot: {x: .5, y: .5}
-    - name: debrief_4
+    - name: debrief_GoldBombStar
       rect:
         serializedVersion: 2
         x: 385
@@ -86,7 +86,7 @@ TextureImporter:
         height: 49
       alignment: 0
       pivot: {x: .5, y: .5}
-    - name: debrief_5
+    - name: debrief_SilverBombStar
       rect:
         serializedVersion: 2
         x: 385
@@ -95,7 +95,7 @@ TextureImporter:
         height: 49
       alignment: 0
       pivot: {x: .5, y: .5}
-    - name: debrief_6
+    - name: debrief_BronzeBombStar
       rect:
         serializedVersion: 2
         x: 385
