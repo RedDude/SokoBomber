@@ -13,6 +13,7 @@ public class Overlord : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
         {
             //reset this level
+            ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel(Application.loadedLevelName);
         }
 	}

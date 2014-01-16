@@ -345,10 +345,12 @@ public class PlayerMovement : MonoBehaviour {
 
         if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.ButtonStyle))
         {
+            ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel("ChooseLevelScene");
         }
         if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.ButtonStyle))
         {
+            ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel(Application.loadedLevelName);
         }
 	}

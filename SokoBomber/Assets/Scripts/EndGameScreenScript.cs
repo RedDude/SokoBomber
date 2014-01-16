@@ -53,10 +53,12 @@ public class EndGameScreenScript : MonoBehaviour {
                 if (ProgressController.Instance.LoadedLevel < ProgressController.Instance.TotalLevelsCount - 1)
                 {
                     ProgressController.Instance.LoadedLevel += 1;
+                    ScreenShakeManager.shakeInt = 0;
                     Application.LoadLevel("Level" + (ProgressController.Instance.LoadedLevel).ToString() + "Scene");
                 }
                 else
                 {
+                    ScreenShakeManager.shakeInt = 0;
                     Application.LoadLevel("ChooseLevelScene");
                 }
             }
@@ -72,11 +74,13 @@ public class EndGameScreenScript : MonoBehaviour {
 
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 100, 100), "Choose Another Level", ProgressController.Instance.FailButtonStyle))
             {
+                ScreenShakeManager.shakeInt = 0;
                 Application.LoadLevel("ChooseLevelScene");
             }
 
             if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 + 100, 100, 100), "Retry this Level", ProgressController.Instance.ButtonStyle))
             {
+                ScreenShakeManager.shakeInt = 0;
                 Application.LoadLevel(Application.loadedLevelName);
             }
         }
