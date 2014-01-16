@@ -26,6 +26,9 @@ public class LevelButtonScript : MonoBehaviour
                     (inWorld.y > this.transform.position.y - 0.75) && (inWorld.y < this.transform.position.y + 0.75))
             {
                 ProgressController.Instance.LoadedLevel = LevelToLoadId;
+
+                GoogleAnalyticsHelper.logEvent("level_" + LevelToLoadId.ToString(), "start", 0); 
+
                 Application.LoadLevel(LevelToLoad);
             }
         }

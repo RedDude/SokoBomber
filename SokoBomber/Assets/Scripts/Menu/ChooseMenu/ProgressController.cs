@@ -62,7 +62,10 @@ public class ProgressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Application.LoadLevel("TemporaryScene");
+        }
     }
 
     public void CompleteLevel(int num)
@@ -71,6 +74,7 @@ public class ProgressController : MonoBehaviour
         {
             CompletionProgress += 1;
             PlayerPrefs.SetInt("Progress_Beta", CompletionProgress);
+
         }
 
         var o = Instantiate(LevelEndObject) as GameObject;
@@ -98,6 +102,8 @@ public class ProgressController : MonoBehaviour
 
         int ans = ReadStarLevel(LoadedLevel);
         SpawnStar(ans);
+
+        GoogleAnalyticsHelper.logEvent("level_" + LoadedLevel.ToString(), "fail", 0); 
     }
 
     void SpawnStar(int type)
@@ -159,6 +165,8 @@ public class ProgressController : MonoBehaviour
             var cmpt = overlord.GetComponent<Overlord>();
 
             int current_turns = cmpt.GetTurnCount();
+
+            GoogleAnalyticsHelper.logEvent("level_" + LoadedLevel.ToString(), "succeed", current_turns); 
 
             int previous = 999999;
             if (PlayerPrefs.HasKey("StarLevel" + level.ToString()))

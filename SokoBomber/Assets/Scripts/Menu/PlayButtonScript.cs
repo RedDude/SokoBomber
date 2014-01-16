@@ -22,5 +22,10 @@ public class PlayButtonScript : MonoBehaviour {
 				Application.LoadLevel("ChooseLevelScene");
 			}
 		}
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Application.LoadLevel("temporary");
+        }
 	}
 }
