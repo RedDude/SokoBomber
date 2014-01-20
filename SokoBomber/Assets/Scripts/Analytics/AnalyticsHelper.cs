@@ -83,7 +83,15 @@ public class AnalyticsHelper : MonoBehaviour {
             string escaped = Uri.EscapeUriString("http://ernestloveland.co.za/analyze.php?q=" + parms);
 
             WebClient wc = new WebClient();
-            wc.OpenRead(new Uri(escaped));
+            wc.OpenReadCompleted += wc_OpenReadCompleted;
+            ORComplete = false;
+            wc.OpenReadAsync(new Uri(escaped));
+
+            int a = 0;
+            while (!ORComplete)
+            {
+                a = 0;
+            }
 
             Debug.Log("End final analytics log");
         }
@@ -93,8 +101,11 @@ public class AnalyticsHelper : MonoBehaviour {
         }
     }
 
+    bool ORComplete = false;
+
     void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
     {
+        ORComplete = true;
         Debug.Log("Analytics success. " + e.ToString());
     }
 
