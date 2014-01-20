@@ -103,7 +103,7 @@ public class ProgressController : MonoBehaviour
         int ans = ReadStarLevel(LoadedLevel);
         SpawnStar(ans);
 
-        GoogleAnalyticsHelper.logEvent("level_" + LoadedLevel.ToString(), "fail", 0); 
+        AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "fail", 0); 
     }
 
     void SpawnStar(int type)
@@ -166,7 +166,7 @@ public class ProgressController : MonoBehaviour
 
             int current_turns = cmpt.GetTurnCount();
 
-            GoogleAnalyticsHelper.logEvent("level_" + LoadedLevel.ToString(), "succeed", current_turns); 
+            AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "succeed", current_turns); 
 
             int previous = 999999;
             if (PlayerPrefs.HasKey("StarLevel" + level.ToString()))

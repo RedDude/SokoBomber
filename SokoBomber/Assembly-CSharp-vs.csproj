@@ -48,7 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\LCUILeftButtonScript.cs" />
      <Compile Include="Assets\LCUIRightButtonScript.cs" />
-     <Compile Include="Assets\Scripts\Analytics\GoogleAnalyticsHelper.cs" />
+     <Compile Include="Assets\Scripts\Analytics\AnalyticsHelper.cs" />
      <Compile Include="Assets\Scripts\Bomb\IgniteManager.cs" />
      <Compile Include="Assets\Scripts\Bomb\ScreenShakeManager.cs" />
      <Compile Include="Assets\Scripts\EndGameScreenScript.cs" />
@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\FlavourTile.cs" />
      <Compile Include="Assets\Scripts\IgniterTimer.cs" />
      <Compile Include="Assets\Scripts\MainMenuScreen.cs" />
+     <Compile Include="Assets\Scripts\MainMenuSound.cs" />
      <Compile Include="Assets\Scripts\Menu\AboutButtonScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\GenerateLevelButtonsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\LevelButtonScript.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Special\Level2\BombSuccess.cs" />
      <Compile Include="Assets\Scripts\Special\Level9\HoleSuccess.cs" />
+     <Compile Include="Assets\Scripts\SpinScript.cs" />
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
      <Compile Include="Assets\Scripts\TestLevelHack.cs" />
      <Compile Include="Assets\Scripts\WallFragmentsSorting.cs" />

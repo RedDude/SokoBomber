@@ -48,7 +48,7 @@ public class LevelButtonScript : MonoBehaviour
             {
                 ProgressController.Instance.LoadedLevel = LevelToLoadId;
 
-                GoogleAnalyticsHelper.logEvent("level_" + LevelToLoadId.ToString(), "start", 0);
+                AnalyticsHelper.Instance.logEvent("level_" + LevelToLoadId.ToString(), "start", 0);
 
                 Application.LoadLevel(LevelToLoad);
             }
