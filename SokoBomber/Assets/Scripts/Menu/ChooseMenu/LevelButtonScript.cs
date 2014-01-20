@@ -11,27 +11,16 @@ public class LevelButtonScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        if (LevelToLoadId < ProgressController.Instance.CompletionProgress)
+        {
+            ProgressController.Instance.SpawnStarAt(ProgressController.Instance.ReadStarLevel(LevelToLoadId), this.transform.position + new Vector3(0,0.7f,0));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray sptoRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 inWorld = sptoRay.GetPoint(-sptoRay.origin.z);
-
-            if ((inWorld.x > this.transform.position.x - 0.75) && (inWorld.x < this.transform.position.x + 0.75) &&
-                    (inWorld.y > this.transform.position.y - 0.75) && (inWorld.y < this.transform.position.y + 0.75))
-            {
-                ProgressController.Instance.LoadedLevel = LevelToLoadId;
-
-                GoogleAnalyticsHelper.logEvent("level_" + LevelToLoadId.ToString(), "start", 0); 
-
-                Application.LoadLevel(LevelToLoad);
-            }
-        }
+        
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -43,6 +32,27 @@ public class LevelButtonScript : MonoBehaviour
         }
 
         screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
+
+        if (LevelToLoadId > ProgressController.Instance.CompletionProgress - 1)
+        {
+            return; //disable buttons
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray sptoRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 inWorld = sptoRay.GetPoint(-sptoRay.origin.z);
+
+            if ((inWorld.x > this.transform.position.x - 0.75) && (inWorld.x < this.transform.position.x + 0.75) &&
+                    (inWorld.y > this.transform.position.y - 0.75) && (inWorld.y < this.transform.position.y + 0.75))
+            {
+                ProgressController.Instance.LoadedLevel = LevelToLoadId;
+
+                GoogleAnalyticsHelper.logEvent("level_" + LevelToLoadId.ToString(), "start", 0);
+
+                Application.LoadLevel(LevelToLoad);
+            }
+        }
 
     }
 
