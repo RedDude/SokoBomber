@@ -41,7 +41,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: LevelChoose_0
+    - name: LevelChoose_TopTiling
       rect:
         serializedVersion: 2
         x: 65
@@ -49,8 +49,8 @@ TextureImporter:
         width: 41
         height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_1
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_TopBoard
       rect:
         serializedVersion: 2
         x: 136
@@ -58,8 +58,8 @@ TextureImporter:
         width: 244
         height: 153
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_2
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_GoldBombStar
       rect:
         serializedVersion: 2
         x: 221
@@ -67,8 +67,8 @@ TextureImporter:
         width: 20
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_3
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_LevelButton
       rect:
         serializedVersion: 2
         x: 263
@@ -76,8 +76,8 @@ TextureImporter:
         width: 94
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_4
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_BronzeBombStar
       rect:
         serializedVersion: 2
         x: 221
@@ -85,8 +85,8 @@ TextureImporter:
         width: 20
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_5
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_SilverBombStar
       rect:
         serializedVersion: 2
         x: 221
@@ -94,8 +94,8 @@ TextureImporter:
         width: 20
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_6
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_QuitButton
       rect:
         serializedVersion: 2
         x: 135
@@ -103,8 +103,8 @@ TextureImporter:
         width: 60
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_7
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_BackButton
       rect:
         serializedVersion: 2
         x: 218
@@ -112,8 +112,8 @@ TextureImporter:
         width: 60
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_8
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_ForwardButton
       rect:
         serializedVersion: 2
         x: 289
@@ -121,8 +121,8 @@ TextureImporter:
         width: 60
         height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_9
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_BottomTiling
       rect:
         serializedVersion: 2
         x: 65
@@ -130,8 +130,8 @@ TextureImporter:
         width: 41
         height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: LevelChoose_10
+      pivot: {x: .5, y: .5}
+    - name: LevelChoose_Bottomboard
       rect:
         serializedVersion: 2
         x: 136
@@ -139,6 +139,6 @@ TextureImporter:
         width: 244
         height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 
