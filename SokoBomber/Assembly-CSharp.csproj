@@ -46,9 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LCUIBackButtonScript.cs" />
-     <Compile Include="Assets\LCUILeftButtonScript.cs" />
-     <Compile Include="Assets\LCUIRightButtonScript.cs" />
+     <Compile Include="Assets\DebriefNextScript.cs" />
+     <Compile Include="Assets\DebriefRestartScript.cs" />
      <Compile Include="Assets\Scripts\Analytics\AnalyticsHelper.cs" />
      <Compile Include="Assets\Scripts\Bomb\IgniteManager.cs" />
      <Compile Include="Assets\Scripts\Bomb\ScreenShakeManager.cs" />
@@ -62,6 +61,9 @@
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\GenerateLevelButtonsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\LevelButtonScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ChooseMenu\ProgressController.cs" />
+     <Compile Include="Assets\Scripts\Menu\LCUIBackButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\LCUILeftButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\LCUIRightButtonScript.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayButtonScript.cs" />
      <Compile Include="Assets\Scripts\Menu\ShowMouseCoords.cs" />
      <Compile Include="Assets\Scripts\OnDestroySpawner.cs" />

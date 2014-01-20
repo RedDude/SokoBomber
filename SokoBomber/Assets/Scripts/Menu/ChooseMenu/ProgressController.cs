@@ -10,6 +10,7 @@ public class ProgressController : MonoBehaviour
     public int TotalLevelsCount = 6;
 
     public GameObject LevelEndObject = null;
+    public GameObject LevelEndBackground = null;
 
     public GUIStyle ButtonStyle = new GUIStyle();
     public GUIStyle SuccessNoticeStyle = new GUIStyle();
@@ -20,6 +21,9 @@ public class ProgressController : MonoBehaviour
     public GameObject BronzeStarPrefab = null;
     public GameObject SilverStarPrefab = null;
     public GameObject GoldStarPrefab = null;
+
+    public GameObject EndGameBronzeStarPrefab = null;
+    public GameObject EndGameSilverStarPrefab = null;
 
     private static ProgressController _instance;
     public static ProgressController Instance
@@ -91,6 +95,9 @@ public class ProgressController : MonoBehaviour
             o.SendMessage("Success", 0, SendMessageOptions.DontRequireReceiver); //default success!
         }
 
+        var plyr = GameObject.FindGameObjectWithTag("Player");
+        Instantiate(LevelEndBackground, plyr.transform.position, Quaternion.identity);
+
         int ans = NewStarLevel(LoadedLevel);
         SpawnStar(ans);
     }
@@ -99,6 +106,9 @@ public class ProgressController : MonoBehaviour
     {
         var o = Instantiate(LevelEndObject) as GameObject;
         o.SendMessage("Failure", num, SendMessageOptions.DontRequireReceiver); //default success!
+
+        var plyr = GameObject.FindGameObjectWithTag("Player");
+        Instantiate(LevelEndBackground, plyr.transform.position, Quaternion.identity);
 
         int ans = ReadStarLevel(LoadedLevel);
         SpawnStar(ans);
@@ -111,12 +121,15 @@ public class ProgressController : MonoBehaviour
 
     void SpawnStar(int type)
     {
-        Debug.Log("Spawning Star: " + type.ToString());
+        var exist = GameObject.FindGameObjectWithTag("DebriefStar");
+
+        var posi = exist.transform.position;
+
         switch (type)
         {
-            case 2: Instantiate(GoldStarPrefab, Camera.main.transform.position - new Vector3(3, 0, -10), Quaternion.identity); break;
-            case 1: Instantiate(SilverStarPrefab, Camera.main.transform.position - new Vector3(3, 0, -10), Quaternion.identity); break;
-            default: Instantiate(BronzeStarPrefab, Camera.main.transform.position - new Vector3(3, 0, -10), Quaternion.identity); break;
+            //case 2: Instantiate(GoldStarPrefab, Camera.main.transform.position - new Vector3(3, 0, -10), Quaternion.identity); break;
+            case 1: Instantiate(EndGameSilverStarPrefab, posi, Quaternion.identity); Destroy(exist); break;
+            case 0: Instantiate(EndGameBronzeStarPrefab, posi, Quaternion.identity); Destroy(exist); break;
         }
     }
 
