@@ -109,7 +109,7 @@ public class AnalyticsHelper : MonoBehaviour {
         Debug.Log("Analytics success. " + e.ToString());
     }
 
-    void OnDestroy()
+    void OnApplicationQuit()
     {
         SendEventBlocked("game", "close", (int)Time.time, " ");
         //new WaitForSeconds(4);
