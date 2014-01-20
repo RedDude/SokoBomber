@@ -103,7 +103,10 @@ public class ProgressController : MonoBehaviour
         int ans = ReadStarLevel(LoadedLevel);
         SpawnStar(ans);
 
-        AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "fail", 0); 
+        if (LoadedLevel != 2)
+        {
+            AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "fail", 0);
+        }
     }
 
     void SpawnStar(int type)
