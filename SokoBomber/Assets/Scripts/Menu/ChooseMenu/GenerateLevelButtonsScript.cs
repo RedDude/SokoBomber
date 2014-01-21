@@ -12,7 +12,7 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
 		int state1 = 0;
 		int state2 = -1;
-		for (int i = 0; i < currentProgress + 1; i++)
+		for (int i = 0; i < currentProgress; i++)
 		{
 			state2 += 1;
 			var o = Instantiate(buttonTemplate, new Vector3(state1 * 2.95f - 2.1f, 2.95f * (1 - (state2 - 1)) -5.1f, 0), Quaternion.identity) as GameObject;
@@ -79,9 +79,9 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
         //    }
         //}
 
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Back To Menu", ProgressController.Instance.ButtonStyle))
-        {
-            Application.LoadLevel("MainMenuScene");
-        }
+        //if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Back To Menu", ProgressController.Instance.ButtonStyle))
+        //{
+        //    Application.LoadLevel("MainMenuScene");
+        //}
     }
 }

@@ -11,7 +11,7 @@ public class LevelButtonScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (LevelToLoadId < ProgressController.Instance.CompletionProgress || LevelToLoadId == 1)
+        if (LevelToLoadId <= ProgressController.Instance.CompletionProgress + 1 || LevelToLoadId == 1)
         {
             ProgressController.Instance.SpawnStarAt(ProgressController.Instance.ReadStarLevel(LevelToLoadId), this.transform.position + new Vector3(0,0.7f,0));
         }
@@ -33,8 +33,9 @@ public class LevelButtonScript : MonoBehaviour
 
         screenPos = Camera.main.WorldToScreenPoint(this.transform.position);
 
-        if (LevelToLoadId > ProgressController.Instance.CompletionProgress - 1 && LevelToLoadId != 1)
+        if (LevelToLoadId > ProgressController.Instance.CompletionProgress + 1 && LevelToLoadId > 1)
         {
+            //Debug.Log("Can't use button: " + LevelToLoadId.ToString() + ", " + ProgressController.Instance.CompletionProgress.ToString());
             return; //disable buttons
         }
 

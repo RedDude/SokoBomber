@@ -66,10 +66,6 @@ public class ProgressController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Application.LoadLevel("TemporaryScene");
-        }
     }
 
     public void CompleteLevel(int num)
@@ -122,9 +118,9 @@ public class ProgressController : MonoBehaviour
     void SpawnStar(int type)
     {
         var exist = GameObject.FindGameObjectWithTag("DebriefStar");
-
+        
         var posi = exist.transform.position;
-
+        
         switch (type)
         {
             //case 2: Instantiate(GoldStarPrefab, Camera.main.transform.position - new Vector3(3, 0, -10), Quaternion.identity); break;
@@ -151,7 +147,7 @@ public class ProgressController : MonoBehaviour
         StarRequirements.Add(new Vector2(10,13)); //3
         StarRequirements.Add(new Vector2(47,55)); //4
         StarRequirements.Add(new Vector2(37,43)); //5
-        StarRequirements.Add(new Vector2(48,56)); //6
+        StarRequirements.Add(new Vector2(49,56)); //6
         StarRequirements.Add(new Vector2(33,39)); //7
         StarRequirements.Add(new Vector2(66,74)); //8
         StarRequirements.Add(new Vector2(2,2)); //9
@@ -164,9 +160,20 @@ public class ProgressController : MonoBehaviour
         StarRequirements.Add(new Vector2(15,15)); //15
         StarRequirements.Add(new Vector2(98,112)); //16
         StarRequirements.Add(new Vector2(37,43)); //17
-        StarRequirements.Add(new Vector2(1,1)); //18
-        //StarRequirements.Add(new Vector2(,)); //19
-        //StarRequirements.Add(new Vector2(,)); //20
+        StarRequirements.Add(new Vector2(49,56)); //18
+        StarRequirements.Add(new Vector2(38,45)); //19
+        StarRequirements.Add(new Vector2(15,25)); //20
+
+        StarRequirements.Add(new Vector2(11, 16));  //21
+        StarRequirements.Add(new Vector2(15, 19));  //22
+        StarRequirements.Add(new Vector2(53, 63));  //23
+        StarRequirements.Add(new Vector2(27, 39));  //24
+        //StarRequirements.Add(new Vector2(15, 15));  //25
+        //StarRequirements.Add(new Vector2(98, 112)); //26
+        //StarRequirements.Add(new Vector2(37, 43));  //27
+        //StarRequirements.Add(new Vector2(49, 56));  //28
+        //StarRequirements.Add(new Vector2(38, 45));  //29
+        //StarRequirements.Add(new Vector2(15, 25));  //30
 
     }
 

@@ -31,7 +31,7 @@ public class IgniteManager : MonoBehaviour {
 	void Update () {
         if (sliding) //slide lerp
         {
-            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.2f);
+            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.33f);
             Vector3 trans_pos = this.transform.position - new_pos;
             this.transform.Translate(-trans_pos);
 

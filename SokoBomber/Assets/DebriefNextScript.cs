@@ -23,7 +23,7 @@ public class DebriefNextScript : MonoBehaviour {
 
                 if (cmpt.WasSuccessful)
                 {
-                    if (ProgressController.Instance.LoadedLevel < ProgressController.Instance.TotalLevelsCount - 1)
+                    if (ProgressController.Instance.LoadedLevel < ProgressController.Instance.TotalLevelsCount)
                     {
                         ProgressController.Instance.LoadedLevel += 1;
                         ScreenShakeManager.shakeInt = 0;
