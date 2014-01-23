@@ -347,13 +347,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnGUI()
 	{
+        var o = GameObject.FindGameObjectWithTag("Finish");
+        if (o != null)
+        {
+            return;
+        }
 
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.ButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.QuitButtonStyle))
         {
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel("ChooseLevelScene");
         }
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.ButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.RestartButtonStyle))
         {
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel(Application.loadedLevelName);

@@ -12,11 +12,11 @@ public class ProgressController : MonoBehaviour
     public GameObject LevelEndObject = null;
     public GameObject LevelEndBackground = null;
 
-    public GUIStyle ButtonStyle = new GUIStyle();
     public GUIStyle SuccessNoticeStyle = new GUIStyle();
     public GUIStyle FailNoticeStyle = new GUIStyle();
-    public GUIStyle SuccessButtonStyle = new GUIStyle();
-    public GUIStyle FailButtonStyle = new GUIStyle();
+
+    public GUIStyle RestartButtonStyle = new GUIStyle();
+    public GUIStyle QuitButtonStyle = new GUIStyle();
 
     public GameObject BronzeStarPrefab = null;
     public GameObject SilverStarPrefab = null;
