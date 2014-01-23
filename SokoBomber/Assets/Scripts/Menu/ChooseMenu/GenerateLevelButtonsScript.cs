@@ -22,8 +22,6 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
             cmpt.LevelToLoad = "Level" + cmpt.LevelToLoadId.ToString() + "Scene";
 
-            //ProgressController.Instance.SpawnStarAt(ProgressController.Instance.ReadStarLevel(i + 1), new Vector3(state1 * -2f +0.5f, 2f * (state2 - 1) - 0.5f, 0));
-
 			if (state2 == 1)
 			{
 				state2 = -1;

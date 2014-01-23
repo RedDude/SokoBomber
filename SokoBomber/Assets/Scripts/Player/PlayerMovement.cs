@@ -353,6 +353,11 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
+        if (ProgressController.Instance == null)
+        {
+            return;
+        }
+
         if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.QuitButtonStyle))
         {
             ScreenShakeManager.shakeInt = 0;
