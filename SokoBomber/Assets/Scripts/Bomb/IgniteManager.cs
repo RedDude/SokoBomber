@@ -385,6 +385,7 @@ public class IgniteManager : MonoBehaviour {
             var coll = FindCollidableAt(checkingPos); //IsCollisionFree is boolean, nub Ernest
             var mov = FindMovableAt(checkingPos);
             var ice_coll = FindIceAt(checkingPos);
+            var dest = FindDestructibleAt(checkingPos);
 
             if (ice_coll == null)
             {
@@ -397,6 +398,11 @@ public class IgniteManager : MonoBehaviour {
                 slide_mod -= 1;
             }
             else if (mov != null)
+            {
+                foundLast = true;
+                slide_mod -= 1;
+            }
+            else if (dest != null)
             {
                 foundLast = true;
                 slide_mod -= 1;
@@ -446,6 +452,21 @@ public class IgniteManager : MonoBehaviour {
     private GameObject FindCollidableAt(Vector3 pos)
     {
         var objs = GameObject.FindGameObjectsWithTag("Collidable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindDestructibleAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Destructible");
 
         for (int i = 0; i < objs.Length; i++)
         {
