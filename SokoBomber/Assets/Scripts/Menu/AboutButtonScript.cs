@@ -18,7 +18,7 @@ public class AboutButtonScript : MonoBehaviour {
 			if ((inWorld.x > this.transform.position.x - 1) && (inWorld.x < this.transform.position.x + 1) &&
 			    (inWorld.y > this.transform.position.y - 0.25) && (inWorld.y < this.transform.position.y + 0.25))
 			{
-				Application.LoadLevel("MainMenuScene"); //TODO: Make an about screen with Credits
+				Application.LoadLevel("AboutScene"); //TODO: Make an about screen with Credits
 			}
 		}
 	}

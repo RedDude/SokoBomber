@@ -46,9 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AboutSceneNotes.cs" />
+     <Compile Include="Assets\AppQuitter.cs" />
      <Compile Include="Assets\DebriefNextScript.cs" />
      <Compile Include="Assets\DebriefRestartScript.cs" />
-     <Compile Include="Assets\Scripts\Analytics\AnalyticsHelper.cs" />
      <Compile Include="Assets\Scripts\Bomb\IgniteManager.cs" />
      <Compile Include="Assets\Scripts\Bomb\ScreenShakeManager.cs" />
      <Compile Include="Assets\Scripts\EndGameScreenScript.cs" />
@@ -76,6 +77,7 @@
      <Compile Include="Assets\Scripts\Starfield\Starfield.cs" />
      <Compile Include="Assets\Scripts\TestLevelHack.cs" />
      <Compile Include="Assets\Scripts\WallFragmentsSorting.cs" />
+     <Compile Include="Assets\TrialNoteSceneScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

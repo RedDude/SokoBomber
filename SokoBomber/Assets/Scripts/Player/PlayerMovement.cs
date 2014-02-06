@@ -360,11 +360,25 @@ public class PlayerMovement : MonoBehaviour {
 
         if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.QuitButtonStyle))
         {
+            var overlord = GameObject.FindGameObjectWithTag("Overlord");
+            var cmpt = overlord.GetComponent<Overlord>();
+
+            int current_turns = cmpt.GetTurnCount();
+
+            //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "gave_up", current_turns);
+
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel("ChooseLevelScene");
         }
         if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.RestartButtonStyle))
         {
+            var overlord = GameObject.FindGameObjectWithTag("Overlord");
+            var cmpt = overlord.GetComponent<Overlord>();
+
+            int current_turns = cmpt.GetTurnCount();
+
+           //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "restarted", current_turns);
+
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel(Application.loadedLevelName);
         }
@@ -372,7 +386,15 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void Die()
 	{
-        ProgressController.Instance.FailLevel(0);
+        var overlord = GameObject.FindGameObjectWithTag("Overlord");
+        var cmpt = overlord.GetComponent<Overlord>();
+
+        int current_turns = cmpt.GetTurnCount();
+
+        //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "exploded", current_turns);
+
+        if (Application.loadedLevelName != "Level2Scene")
+            ProgressController.Instance.FailLevel(0);
 
 		Destroy (this.gameObject);
 	}

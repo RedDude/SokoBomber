@@ -35,10 +35,6 @@ public class GenerateLevelButtonsScript : MonoBehaviour {
 
 	}
 
-    float MaxOffset = 7f;
-    float MinOffset = 0f;
-    float CurrentOffset = 0f;
-
     void OnGUI()
     {
         //Vector3 wtspUp = Camera.main.WorldToScreenPoint(upButton);

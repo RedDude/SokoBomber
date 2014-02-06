@@ -74,7 +74,7 @@ public class ProgressController : MonoBehaviour
         {
             CompletionProgress += 1;
             PlayerPrefs.SetInt("Progress_Beta", CompletionProgress);
-
+            PlayerPrefs.Save();
         }
 
         var o = Instantiate(LevelEndObject) as GameObject;
@@ -94,6 +94,13 @@ public class ProgressController : MonoBehaviour
         var plyr = GameObject.FindGameObjectWithTag("Player");
         Instantiate(LevelEndBackground, plyr.transform.position, Quaternion.identity);
 
+        var overlord = GameObject.FindGameObjectWithTag("Overlord");
+        var cmpt = overlord.GetComponent<Overlord>();
+
+        int current_turns = cmpt.GetTurnCount();
+
+        //AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "succeed", current_turns); 
+
         int ans = NewStarLevel(LoadedLevel);
         SpawnStar(ans);
     }
@@ -111,7 +118,12 @@ public class ProgressController : MonoBehaviour
 
         if (LoadedLevel != 2)
         {
-            AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "fail", 0);
+            var overlord = GameObject.FindGameObjectWithTag("Overlord");
+            var cmpt = overlord.GetComponent<Overlord>();
+
+            int current_turns = cmpt.GetTurnCount();
+
+            //AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "fail", current_turns);
         }
     }
 
@@ -168,12 +180,23 @@ public class ProgressController : MonoBehaviour
         StarRequirements.Add(new Vector2(15, 19));  //22
         StarRequirements.Add(new Vector2(53, 63));  //23
         StarRequirements.Add(new Vector2(27, 39));  //24
-        //StarRequirements.Add(new Vector2(15, 15));  //25
-        //StarRequirements.Add(new Vector2(98, 112)); //26
-        //StarRequirements.Add(new Vector2(37, 43));  //27
-        //StarRequirements.Add(new Vector2(49, 56));  //28
-        //StarRequirements.Add(new Vector2(38, 45));  //29
-        //StarRequirements.Add(new Vector2(15, 25));  //30
+        StarRequirements.Add(new Vector2(39, 63));  //25
+        StarRequirements.Add(new Vector2(98, 112)); //26
+        StarRequirements.Add(new Vector2(35, 43));  //27
+        StarRequirements.Add(new Vector2(77, 89));  //28
+        StarRequirements.Add(new Vector2(88, 101));  //29
+        StarRequirements.Add(new Vector2(99, 114));  //30
+
+        StarRequirements.Add(new Vector2(110, 124));  //31
+        StarRequirements.Add(new Vector2(195, 232));  //32
+        StarRequirements.Add(new Vector2(92, 99));  //33
+        //StarRequirements.Add(new Vector2(1, 39));  //34
+        //StarRequirements.Add(new Vector2(1, 15));  //35
+        //StarRequirements.Add(new Vector2(98, 112)); //36
+        //StarRequirements.Add(new Vector2(37, 43));  //37
+        //StarRequirements.Add(new Vector2(49, 56));  //38
+        //StarRequirements.Add(new Vector2(38, 45));  //39
+        //StarRequirements.Add(new Vector2(15, 25));  //40
 
     }
 
@@ -189,7 +212,6 @@ public class ProgressController : MonoBehaviour
 
             int current_turns = cmpt.GetTurnCount();
 
-            AnalyticsHelper.Instance.logEvent("level_" + LoadedLevel.ToString(), "succeed", current_turns); 
 
             int previous = 999999;
             if (PlayerPrefs.HasKey("StarLevel" + level.ToString()))
@@ -202,6 +224,8 @@ public class ProgressController : MonoBehaviour
                 PlayerPrefs.SetInt("StarLevel" + level.ToString(), current_turns);
                 previous = current_turns;
             }
+
+            PlayerPrefs.Save();
 
             Debug.Log("Finding star level: " + previous.ToString() + ", " + reqs.ToString());
             if (previous < reqs.x)
