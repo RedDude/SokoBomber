@@ -185,6 +185,7 @@ public class PlayerMovement : MonoBehaviour {
                         var coll = FindCollidableAt(checkingPos); //IsCollisionFree is boolean, nub Ernest
                         var mov = FindMovableAt(checkingPos);
                         var ice_coll = FindIceAt(checkingPos);
+                        var dest = FindDestructibleAt(checkingPos);
 
                         if (ice_coll == null)
                         {
@@ -201,7 +202,11 @@ public class PlayerMovement : MonoBehaviour {
                             foundLast = true;
                             slide_mod -= 1;
                         }
-
+                        else if (dest != null)
+                        {
+                            foundLast = true;
+                            slide_mod -= 1;
+                        }
                     }
 
                     var tmp_vect = this.transform.position + ((slide_mod) * slideDir);
@@ -232,7 +237,7 @@ public class PlayerMovement : MonoBehaviour {
         
         if (sliding) //slide lerp
         {
-            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.2f);
+            Vector3 new_pos = Vector3.Lerp(this.transform.position, slideEndPos, 0.33f);
             Vector3 trans_pos = this.transform.position - new_pos;
             this.transform.Translate(-trans_pos);
             Camera.main.transform.Translate(-trans_pos);
@@ -342,14 +347,38 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnGUI()
 	{
-
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.ButtonStyle))
+        var o = GameObject.FindGameObjectWithTag("Finish");
+        if (o != null)
         {
+            return;
+        }
+
+        if (ProgressController.Instance == null)
+        {
+            return;
+        }
+
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.QuitButtonStyle))
+        {
+            var overlord = GameObject.FindGameObjectWithTag("Overlord");
+            var cmpt = overlord.GetComponent<Overlord>();
+
+            int current_turns = cmpt.GetTurnCount();
+
+            //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "gave_up", current_turns);
+
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel("ChooseLevelScene");
         }
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.ButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.RestartButtonStyle))
         {
+            var overlord = GameObject.FindGameObjectWithTag("Overlord");
+            var cmpt = overlord.GetComponent<Overlord>();
+
+            int current_turns = cmpt.GetTurnCount();
+
+           //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "restarted", current_turns);
+
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel(Application.loadedLevelName);
         }
@@ -357,7 +386,15 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void Die()
 	{
-        ProgressController.Instance.FailLevel(0);
+        var overlord = GameObject.FindGameObjectWithTag("Overlord");
+        var cmpt = overlord.GetComponent<Overlord>();
+
+        int current_turns = cmpt.GetTurnCount();
+
+        //AnalyticsHelper.Instance.logEvent("level_" + ProgressController.Instance.LoadedLevel.ToString(), "exploded", current_turns);
+
+        if (Application.loadedLevelName != "Level2Scene")
+            ProgressController.Instance.FailLevel(0);
 
 		Destroy (this.gameObject);
 	}
@@ -395,6 +432,21 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject FindCollidableAt(Vector3 pos)
     {
         var objs = GameObject.FindGameObjectsWithTag("Collidable");
+
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if ((objs[i].transform.position - pos).magnitude < 0.01f)
+            {
+                return objs[i];
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindDestructibleAt(Vector3 pos)
+    {
+        var objs = GameObject.FindGameObjectsWithTag("Destructible");
 
         for (int i = 0; i < objs.Length; i++)
         {

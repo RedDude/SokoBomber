@@ -15,7 +15,7 @@ public class BombSuccess : MonoBehaviour {
 
     void AfterExplode()
     {
-        ProgressController.Instance.CompleteLevel(ProgressController.Instance.LoadedLevel);
+        ProgressController.Instance.CompleteLevel(1);
 
         //Application.LoadLevel("ChooseLevelScene");
     }
