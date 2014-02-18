@@ -29,7 +29,14 @@ public class TrialNoteSceneScript : MonoBehaviour {
 
         if (GUI.Button(new Rect(Screen.width - 125, Screen.height - 125, 100, 100), "", BuyButtonStyle))
         {
-            UnityEngine.Windows.LicenseInformation.PurchaseApp();
+            try
+            {
+                UnityEngine.Windows.LicenseInformation.PurchaseApp();
+            }
+            catch
+            {
+
+            }
         }
     }
     string AboutNote = "Oh dear! You have finished everything available on the trial version of SokoBomber...\n\n" +

@@ -47,11 +47,15 @@ public class LevelButtonScript : MonoBehaviour
             if ((inWorld.x > this.transform.position.x - 0.75) && (inWorld.x < this.transform.position.x + 0.75) &&
                     (inWorld.y > this.transform.position.y - 0.75) && (inWorld.y < this.transform.position.y + 0.75))
             {
-                if (UnityEngine.Windows.LicenseInformation.isOnAppTrial && LevelToLoadId > 10)
+                try
                 {
-                    Application.LoadLevel("TrialNoteScene");
-                    return;
+                    if (UnityEngine.Windows.LicenseInformation.isOnAppTrial && LevelToLoadId > 10)
+                    {
+                        Application.LoadLevel("TrialNoteScene");
+                        return;
+                    }
                 }
+                catch { }
                 ProgressController.Instance.LoadedLevel = LevelToLoadId;
 
                 //AnalyticsHelper.Instance.logEvent("level_" + LevelToLoadId.ToString(), "start", 0);

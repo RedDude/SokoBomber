@@ -25,11 +25,15 @@ public class DebriefNextScript : MonoBehaviour {
                 {
                     if (ProgressController.Instance.LoadedLevel < ProgressController.Instance.TotalLevelsCount)
                     {
-                        if (UnityEngine.Windows.LicenseInformation.isOnAppTrial && ProgressController.Instance.LoadedLevel + 1 > 10)
+                        try
                         {
-                            Application.LoadLevel("TrialNoteScene");
-                            return;
+                            if (UnityEngine.Windows.LicenseInformation.isOnAppTrial && ProgressController.Instance.LoadedLevel + 1 > 10)
+                            {
+                                Application.LoadLevel("TrialNoteScene");
+                                return;
+                            }
                         }
+                        catch { }
 
                         ProgressController.Instance.LoadedLevel += 1;
                         ScreenShakeManager.shakeInt = 0;
