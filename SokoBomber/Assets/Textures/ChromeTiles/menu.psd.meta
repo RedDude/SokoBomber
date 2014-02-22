@@ -104,5 +104,23 @@ TextureImporter:
         height: 54
       alignment: 0
       pivot: {x: .5, y: .5}
+    - name: menu_7
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 332
+        width: 97
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: menu_8
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 265
+        width: 68
+        height: 68
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 

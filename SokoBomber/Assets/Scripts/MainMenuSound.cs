@@ -6,7 +6,8 @@ public class MainMenuSound : MonoBehaviour
 
     public AudioClip[] heavyRockSounds;
     public AudioClip[] lightRockSounds;
-	// Use this for initialization
+    public AudioClip gemDrop;
+    // Use this for initialization
 
     public void PlayRandomLightRockSound()
     {
@@ -20,5 +21,9 @@ public class MainMenuSound : MonoBehaviour
         audio.PlayOneShot(heavyRockSounds[index]);
     }
 
+    public void PlayGemDrop()
+    {
+        audio.PlayOneShot(gemDrop);
+    }
 
 }
