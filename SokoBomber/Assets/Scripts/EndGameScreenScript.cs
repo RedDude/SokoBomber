@@ -43,14 +43,14 @@ public class EndGameScreenScript : MonoBehaviour {
 
     void OnGUI()
     {
-        
+
         if (WasSuccessful)
         {
-            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200), Message, ProgressController.Instance.SuccessNoticeStyle);
+            GUI.TextArea(new Rect(Screen.width / 2 - 180, Screen.height / 2 - 75, 360, 150), Message, ProgressController.Instance.SuccessNoticeStyle);
         }
         else
         {
-            GUI.TextArea(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 100, 400, 200), Message, ProgressController.Instance.FailNoticeStyle);
+            GUI.TextArea(new Rect(Screen.width / 2 - 180, Screen.height / 2 - 75, 360, 150), Message, ProgressController.Instance.FailNoticeStyle);
         }
     }
 }

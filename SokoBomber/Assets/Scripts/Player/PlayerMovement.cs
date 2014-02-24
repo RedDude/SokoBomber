@@ -42,12 +42,14 @@ public class PlayerMovement : MonoBehaviour {
 					//move left
 					movementTargetPos = new Vector3(this.transform.position.x - 1f, this.transform.position.y, this.transform.position.z);
 					movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
+                    PlayAnim(2);
 				}
 				else if (mouseDir.x >= 0)
 				{
 					//move right
 					movementTargetPos = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
 					movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
+                    PlayAnim(4);
 				}
 			}
 			else if (Mathf.Abs(mouseDir.x) <= Mathf.Abs(mouseDir.y))
@@ -58,12 +60,14 @@ public class PlayerMovement : MonoBehaviour {
 					//move up
 					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
 					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
+                    PlayAnim(3);
 				}
 				else if (mouseDir.y >= 0)
 				{
 					//move down
 					movementTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
 					movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
+                    PlayAnim(1);
 				}
 			}
 
@@ -79,6 +83,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
+                PlayAnim(1);
 			}
 			else if (Input.GetKey(KeyCode.W))
 			{
@@ -86,6 +91,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
+                PlayAnim(3);
 			}
 			else if (Input.GetKey(KeyCode.A))
 			{
@@ -93,6 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x - 2f, this.transform.position.y, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
+                PlayAnim(2);
 			}
 			else if (Input.GetKey(KeyCode.D))
 			{
@@ -100,6 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x + 2f, this.transform.position.y, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
+                PlayAnim(4);
 			}
 		}
 
@@ -254,6 +262,14 @@ public class PlayerMovement : MonoBehaviour {
             }
 
         }
+
+        if (!moving)
+        {
+            if (!(Input.GetMouseButton(0) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+            {
+                PlayAnim(0);
+            }
+        }
 	}
 
     bool IsCollisionFree(Vector3 pos)
@@ -358,7 +374,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
-        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "Quit", ProgressController.Instance.QuitButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), "", ProgressController.Instance.QuitButtonStyle))
         {
             var overlord = GameObject.FindGameObjectWithTag("Overlord");
             var cmpt = overlord.GetComponent<Overlord>();
@@ -370,7 +386,7 @@ public class PlayerMovement : MonoBehaviour {
             ScreenShakeManager.shakeInt = 0;
             Application.LoadLevel("ChooseLevelScene");
         }
-        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "Restart", ProgressController.Instance.RestartButtonStyle))
+        if (GUI.Button(new Rect(Screen.width - 200, Screen.height - 100, 100, 100), "", ProgressController.Instance.RestartButtonStyle))
         {
             var overlord = GameObject.FindGameObjectWithTag("Overlord");
             var cmpt = overlord.GetComponent<Overlord>();
@@ -457,5 +473,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         return null;
+    }
+
+    void PlayAnim(int id)
+    {
+        var cmpt = GetComponent<Animator>();
+        cmpt.SetInteger("walkDir", id);
     }
 }
