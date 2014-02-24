@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y - 2f, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
-                PlayAnim(1);
+                PlayAnim(3);
 			}
 			else if (Input.GetKey(KeyCode.W))
 			{
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour {
 				movableTargetPos = new Vector3(this.transform.position.x, this.transform.position.y + 2f, this.transform.position.z);
 				moving = true;
 				movingCollision = true;
-                PlayAnim(3);
+                PlayAnim(1);
 			}
 			else if (Input.GetKey(KeyCode.A))
 			{
